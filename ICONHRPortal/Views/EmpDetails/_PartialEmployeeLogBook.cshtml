@@ -1,0 +1,323 @@
+﻿<div id="emp-t2" class="tab-pane">
+    <!-- <h3>Log Book</h3>
+     <hr />-->
+    <div id="emplo1" class="tab-pane active">
+        <div class="form-group clearfix label-formcontrol row">
+            <div class="form-group col-sm-4">
+                <label class="control-label" for="confirm">Types</label>
+
+                <select name="ddlTypeTypeList" class="form-control" ng-model="DocumentType" ng-change="documentTypeChange(DocumentType)">
+                    <option value="General" screenname="1-2-1's">1-2-1's</option>
+                    <option value="Appraisal" screenname="Appraisal">Appraisal</option>
+                    <option value="DrivingLicence" screenname="Driving Licence">Driving Licence</option>
+                    <option value="IssueLog" screenname="Issue Log">Issue Log</option>
+                    <option value="Training" screenname="Training">Training</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-4">
+
+                <div class="actions-bt clearfix">
+                    <div class="pull-right">
+                        <button type="button" class="round-button waves-effect mt-30" data-toggle="modal" data-target="#timesheet-addemployeelogbook-modal" ng-click="addNewLogBook()">Add New</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered m-0">
+                <thead>
+                    <tr>
+                        @*General*@
+                        <th ng-if="DocumentType=='General'">Date</th>
+                        <th ng-if="DocumentType=='General'">Type</th>
+                        <th ng-if="DocumentType=='General'">Summary</th>
+                        @*Appisal*@
+                        <th ng-if="DocumentType=='Appraisal'">Review Date</th>
+                        <th ng-if="DocumentType=='Appraisal'">Reviewer Name</th>
+                        <th ng-if="DocumentType=='Appraisal'">Notes</th>
+                        @*Licence*@
+                        <th ng-if="DocumentType=='DrivingLicence'">Licence Number</th>
+                        <th ng-if="DocumentType=='DrivingLicence'">Licence Type</th>
+                        <th ng-if="DocumentType=='DrivingLicence'">Expiry Date</th>
+                        @*Log*@
+                        <th ng-if="DocumentType=='IssueLog'">Issue</th>
+                        <th ng-if="DocumentType=='IssueLog'">Status</th>
+                        <th ng-if="DocumentType=='IssueLog'">Created Date</th>
+                        <th ng-if="DocumentType=='IssueLog'">Closed Date</th>
+                        <th ng-if="DocumentType=='IssueLog'">Notes</th>
+                        @*Training*@
+                        <th ng-if="DocumentType=='Training'">Type</th>
+                        <th ng-if="DocumentType=='Training'">Description</th>
+                        <th ng-if="DocumentType=='Training'">Type</th>
+                        <th ng-if="DocumentType=='Training'">Status</th>
+                        <th ng-if="DocumentType=='Training'">Start Date</th>
+                        <th ng-if="DocumentType=='Training'">End Date</th>
+                        <th ng-if="DocumentType=='Training'">Notes</th>
+                        <th>Document</th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="item in EmployeeLogBookList">
+                    <tr>
+                        @*General*@
+                        <td ng-if="DocumentType=='General'"><a href=""><span ng-click="getEmployeeLogBook(item)">{{item.LogDate | date:'MM/dd/yyyy'}}</span></a></td>
+                        <td ng-if="DocumentType=='General'">{{item.Type}}</td>
+                        <td ng-if="DocumentType=='General'">{{item.Summary}}</td>
+                        @*Appisal*@
+                        <td ng-if="DocumentType=='Appraisal'"><a href=""><span ng-click="getEmployeeLogBook(item)">{{item.ApprisalReviewDate | date:'MM/dd/yyyy'}}</span></a></td>
+                        <td ng-if="DocumentType=='Appraisal'">{{item.ApprisalReviewerName}}</td>
+                        <td ng-if="DocumentType=='Appraisal'">{{item.ApprisalNotes}}</td>
+                        @*Licence*@
+                        <td ng-if="DocumentType=='DrivingLicence'"><a href=""><span ng-click="getEmployeeLogBook(item)">{{item.DrivingLicenceNumber| date:'MM/dd/yyyy'}}</span></a></td>
+                        <td ng-if="DocumentType=='DrivingLicence'">{{item.LicenceType}}</td>
+                        <td ng-if="DocumentType=='DrivingLicence'">{{item.LicenceExpiryDate | date:'MM/dd/yyyy'}}</td>
+                        @*Log*@
+                        <td ng-if="DocumentType=='IssueLog'"><a href=""><span ng-click="getEmployeeLogBook(item)">{{item.Issue | date:'MM/dd/yyyy'}} </span></a></td>
+                        <td ng-if="DocumentType=='IssueLog'">{{item.IssueStatus}}</td>
+                        <td ng-if="DocumentType=='IssueLog'">{{item.IssueCreatedDate | date:'MM/dd/yyyy'}}</td>
+                        <td ng-if="DocumentType=='IssueLog'">{{item.IssueClosedDate | date:'MM/dd/yyyy'}}</td>
+                        <td ng-if="DocumentType=='IssueLog'">{{item.IssueNotes}}</td>
+                        @*'Training'*@
+                        <td ng-if="DocumentType=='Training'"><a href=""><span ng-click="getEmployeeLogBook(item)">{{item.TrainingType | date:'MM/dd/yyyy'}}</span></a></td>
+                        <td ng-if="DocumentType=='Training'">{{item.TrainingDescription}}</td>
+                        <td ng-if="DocumentType=='Training'">{{item.PriorityType}}</td>
+                        <td ng-if="DocumentType=='Training'">{{item.TrainingStatus}}</td>
+                        <td ng-if="DocumentType=='Training'">{{item.TrainingStartDate | date:'MM/dd/yyyy'}}</td>
+                        <td ng-if="DocumentType=='Training'">{{item.TrainingEndDate | date:'MM/dd/yyyy'}}</td>
+                        <td ng-if="DocumentType=='Training'">{{item.TrainingNotes}}</td>
+                        <td><a><span ng-click="downLoadFile(item)">{{item.DocName}}</span></a></td>
+                        <td><a href="" ng-click="deleteLogbook(item)"><span class="glyphicon glyphicon-remove deleteicon"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!---TimeSheet-->
+<form name="formLogbook" role="form" id="formLogbook" class="edit-form" novalidate>
+    <div id="timesheet-addemployeelogbook-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="employeeLogBookPopup">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Log Book</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="control-label" for="confirm">Types</label>
+
+                            <select name="ddlTypeList" id="ddlTypeList" class="form-control" ng-model="AddDocumentType" ng-change="addDocumentTypeChange(AddDocumentType)">
+                                <option value="General">1-2-1's</option>
+                                <option value="Appraisal">Appraisal</option>
+                                <option value="DrivingLicence">Driving Licence</option>
+                                <option value="IssueLog">Issue Log</option>
+                                <option value="Training">Training</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='General'">
+                            <label class="label-control  required">Date</label>
+                            <div class="input-group date" data-provide="datepicker" id="divLogDate">
+                                <input type="text" class="form-control" id="LogDate" name="LogDate"  ng-required="AddDocumentType=='General'" ng-model="employeeLogBookDetail.LogDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='General'">
+                            <label class="label-control  required">Type</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.Type" class="form-control">*@
+                            <select name="ddlType" id="ddlType" ng-model="employeeLogBookDetail.Type" ng-required="AddDocumentType=='General'" class="form-control">
+                                <option value="">Select</option>
+                                <option value="Probation">Probation</option>
+                                <option value="Regular">Regular</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12" ng-if="AddDocumentType=='General'">
+                            <label class="label-control  required">Summary</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.Summary" class="form-control">*@
+                            <textarea type="text" id="txtGeneralSummary" name="txtGeneralSummary" autocomplete="off" placeholder="" ng-required="AddDocumentType=='General'" ng-model="employeeLogBookDetail.Summary" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='Appraisal'">
+                            <label class="label-control  required">Review Date</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.ApprisalReviewDate" class="form-control">*@
+                            <div class="input-group date" data-provide="datepicker" id="divApprisalReviewDate">
+                                <input type="text" id="txtApprisalReviewDate" name="txtApprisalReviewDate" class="form-control" ng-required="AddDocumentType=='Appraisal'" ng-model="employeeLogBookDetail.ApprisalReviewDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='Appraisal'">
+                            <label class="label-control  required">Reviewer Name</label>
+                            <select class="form-control" id="ddlReviewerName" name="ddlReviewerName" ng-model="employeeLogBookDetail.ApprisalReviewerID" ng-required="AddDocumentType=='Appraisal'" data-ng-selected="employeeLogBookDetail.ApprisalReviewerID" ng-options="e.EmpID as e.EmpName for e in AdminDetails" id="ddlApprisalReviewerID" name="ddlApprisalReviewerID">
+                                @*<option value="" selected="selected">Select</option>*@
+                                @*<option ng-repeat="option in AdminDetails" value="{{option.ID}}" ng-selected="$first">
+                                        {{option.name}}
+                                    </option>*@
+                            </select>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.ApprisalReviewerID" class="form-control">*@
+                        </div>
+
+                        <div class="form-group col-sm-12" ng-if="AddDocumentType=='Appraisal'">
+                            <label class="label-control  required">Notes</label>
+
+                            <textarea type="text" id="txtAppraisalNotes" name="txtAppraisalNotes" autocomplete="off" placeholder="" ng-required="AddDocumentType=='Appraisal'" ng-model="employeeLogBookDetail.ApprisalNotes" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='DrivingLicence'">
+                            <label class="label-control  required">Licence Number</label>
+                            <input type="text" placeholder="" id="txtLicenceNumber" name="txtLicenceNumber" ng-model="employeeLogBookDetail.DrivingLicenceNumber" ng-required="AddDocumentType=='DrivingLicence'" class="form-control">
+                        </div>
+
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='DrivingLicence'">
+                            <label class="label-control  required">Licence Type</label>
+                            <input type="text" placeholder="" id="txtLicenceType" name="txtLicenceType" ng-model="employeeLogBookDetail.LicenceType" ng-required="AddDocumentType=='DrivingLicence'" class="form-control">
+                        </div>
+
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='DrivingLicence'">
+                            <label class="label-control  required">Expiry Date</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.LicenceExpiryDate" class="form-control">*@
+                            <div class="input-group date" data-provide="datepicker" id="divLicenceExpiryDate">
+                                <input type="text" class="form-control" id="LicenceExpiryDate" name="LicenceExpiryDate" ng-required="AddDocumentType=='DrivingLicence'" ng-model="employeeLogBookDetail.LicenceExpiryDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='IssueLog'">
+                            <label class="label-control  required">Issue</label>
+                            <input type="text" name="txtIssue" id="txtIssue" placeholder="" ng-model="employeeLogBookDetail.Issue" ng-required="AddDocumentType=='IssueLog'" class="form-control">
+                        </div>
+
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='IssueLog'">
+                            <label class="label-control  required">Issue Status</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.IssueStatus" class="form-control">*@
+                            <select name="ddlIssueStatus" id="ddlIssueStatus" ng-model="employeeLogBookDetail.IssueStatus" ng-required="AddDocumentType=='IssueLog'" class="form-control">
+                                <option value="">Select</option>
+                                <option value="Closed">Closed</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Open">Open</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='IssueLog'">
+                            <label class="label-control  required">Created Date</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.IssueCreatedDate" class="form-control">*@
+                            <div class="input-group date" data-provide="datepicker" id="divIssueCreatedDate">
+                                <input type="text" class="form-control" id="IssueCreatedDate" name="IssueCreatedDate" ng-required="AddDocumentType=='IssueLog'" ng-model="employeeLogBookDetail.IssueCreatedDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6" ng-if="AddDocumentType=='IssueLog'">
+                            <label class="label-control  required">Closed Date</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.IssueClosedDate" class="form-control">*@
+                            <div class="input-group date" data-provide="datepicker" id="divIssueClosedDate">
+                                <input type="text" class="form-control" id="IssueClosedDate" name="IssueClosedDate" ng-required="AddDocumentType=='IssueLog'" ng-model="employeeLogBookDetail.IssueClosedDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12" ng-if="AddDocumentType=='IssueLog'">
+                            <label class="label-control  required">Notes</label>
+                            <textarea type="text" name="txtIssueNote" id="txtIssueNote" autocomplete="off" placeholder="" ng-required="AddDocumentType=='IssueLog'" ng-model="employeeLogBookDetail.IssueNotes" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">Type</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.TrainingType" class="form-control">*@
+                            <select name="ddlTrainingType" id="ddlTrainingType" ng-required="AddDocumentType=='Training'" ng-model="employeeLogBookDetail.TrainingType" class="form-control">
+                                <option value="0">Select</option>
+                                <option value="Customer Service">Customer Service</option>
+                                <option value="Fire Safety">Fire Safety</option>
+                                <option value="FSA">FSA</option>
+                                <option value="Health & Safety">Health &amp; Safety</option>
+                                <option value="Induction">Induction</option>
+                                <option value="Internal IT Systems">Internal IT Systems</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Manage This List">+(Manage This List)</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">Description</label>
+                            <input name="txtDes" id="txtDes" type="text" placeholder="" ng-model="employeeLogBookDetail.TrainingDescription" ng-required="AddDocumentType=='Training'" class="form-control">
+                        </div>
+
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">Priority Type</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.PriorityType" class="form-control">*@
+                            <select name="ddlImportance" id="ddlImportance" ng-model="employeeLogBookDetail.PriorityType" ng-required="AddDocumentType=='Training'" class="form-control">
+                                <option selected="selected" value="0">Select</option>
+                                <option value="Mandatory">Mandatory</option>
+                                <option value="Optional">Optional</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">Status</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.TrainingStatus" class="form-control">*@
+
+                            <select name="ddlStatus" id="ddlStatus" ng-model="employeeLogBookDetail.TrainingStatus" ng-required="AddDocumentType=='Training'" class="form-control">
+                                <option selected="selected" value="Outstanding">Outstanding</option>
+                                <option value="Planned">Planned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">Start Date</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.TrainingStartDate" class="form-control">*@
+                            <div class="input-group date" data-provide="datepicker" id="divTrainingStartDate">
+                                <input type="text" class="form-control" id="TrainingStartDate" name="TrainingStartDate" ng-required="AddDocumentType=='Training'" ng-model="employeeLogBookDetail.TrainingStartDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">End Date</label>
+                            @*<input type="text" placeholder="" ng-model="employeeLogBookDetail.TrainingEndDate" class="form-control">*@
+                            <div class="input-group date" data-provide="datepicker" id="divIssueClosedDate">
+                                <input type="text" class="form-control" id="IssueClosedDate" name="IssueClosedDate" ng-required="AddDocumentType=='Training'" ng-model="employeeLogBookDetail.IssueClosedDate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12" ng-if="AddDocumentType=='Training'">
+                            <label class="label-control  required">Notes</label>
+                            <textarea type="text" autocomplete="off" name="txtNotets" id="txtNotets" placeholder="" ng-required="AddDocumentType=='Training'" ng-model="employeeLogBookDetail.TrainingNotes" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-12 control-label " for="confirm">File Upload</label>
+                                <a href=""><span ng-click="downLoadFile(employeeLogBookDetail)">{{employeeLogBookDetail.DocName}}</span></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="input-description">File Upload</label><br />
+                                <input type="file" ngfile id="Document" ngf-select="upload($event)" name="Document" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" data-dismiss="modal" class="round-button waves-effect">Cancel</button>
+                        <button type="submit" class="round-button waves-effect" ng-click="saveEmployeeLogBook(formLogbook)"> Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+    </form>

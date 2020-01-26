@@ -1,0 +1,54 @@
+﻿<div id="settingt4" class="tab-pane" ng-controller="employeeSettingController">
+    <!-- <h3>Employee </h3>
+     <hr />-->
+    <div class="container">
+        <div class="form-group col-md-6">
+            <label class="  control-label " for="confirm">Employee can see their own salary</label>
+
+            <label class="check-input">
+                <input type="checkbox" id="chkHolidayEnttilement" ng-model="employeeSetting.EmployeeCanSeeTheirOwnSalary">
+                <span class="checkmark" style="margin-top:3px;"></span>
+            </label>
+
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label " for="confirm">Employee can upload photo</label>
+           
+                <label class="check-input">
+                    <input type="checkbox" id="chkHolidayEnttilement" ng-model="employeeSetting.AllowEmployeeToUploadPhoto">
+                    <span class="checkmark" style="margin-top:3px;"></span>
+                </label>
+           
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label " for="confirm">Manager can see employee salary</label>
+          
+                <label class="check-input">
+                    <input type="checkbox" id="chkHolidayEnttilement" ng-model="employeeSetting.ManagerCanSeeEmployeeSalary">
+                    <span class="checkmark" style="margin-top:3px;"></span>
+                </label>
+            
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label " for="confirm">Manager can see employee contact details</label>
+          
+                <label class="check-input">
+                    <input type="checkbox" id="chkHolidayEnttilement" ng-model="employeeSetting.ManagerCanSeeEmployeeContactDetail">
+                    <span class="checkmark" style="margin-top:3px;"></span>
+                </label>
+            
+        </div>
+
+
+    
+            <div class="col-md-12" style="text-align:center;">
+              
+                    <div class="input-group input-file" name="Fichier1">
+                        <button class="round-button waves-effect" ng-click="employeeSettingClick()" type="button">Save</button>
+                   
+                </div>
+            
+        </div>
+    </div>
+</div>
+

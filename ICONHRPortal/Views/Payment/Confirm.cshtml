@@ -1,0 +1,99 @@
+﻿@using SagePay.IntegrationKit;
+@using ICONHRPaymentGateway;
+@model CustomForm
+
+@{
+    ViewBag.Title = "Confirm Page";
+    Layout = "~/Views/Shared/_LayoutPlain.cshtml";
+}
+
+<div class="jumbotron1">
+    <h1>SagePay</h1>
+    <p class="lead">Confirm below detail and click on checkout so we will forward you on SagePay for the payment process.</p>
+
+    <div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>First Name</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+            </div> <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Last Name</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div><br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Address 1</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Address1, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div><br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Address 2</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Address2, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div><br />
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>City</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.City, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div> <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Post Code</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.PostCode, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div><br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Phone</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div><br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>DOB</label>
+                </div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.DOB, new { @class = "form-class", @readonly = "readonly" })
+                </div>
+
+            </div><br />
+        </div>
+    </div>
+
+    <form action="@SagePaySettings.FormPaymentUrl" method="post" id="SagePayForm" name="SagePayForm">
+        <input type="hidden" name="VPSProtocol" value="@SagePaySettings.ProtocolVersion.VersionString()" />
+        <input type="hidden" name="TxType" value="@SagePaySettings.DefaultTransactionType" />
+        <input type="hidden" name="Vendor" value="@SagePaySettings.VendorName" />
+        <input type="hidden" name="Crypt" value="@ViewBag.Crypt" />
+        <button type="submit" class="btn btn-primary btn-lg">Submit </button>
+    </form>
+</div>

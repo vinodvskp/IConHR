@@ -1,0 +1,192 @@
+﻿<style>
+
+
+    /* Accordion styles */
+    .tabs {
+       
+        overflow: hidden;
+        /*box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);*/
+    }
+    .employeeTab {
+        box-shadow: none !important;
+    }
+    .tab-label {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5em;
+        background: #efddfa;
+        font-weight: 400;
+        cursor: pointer;
+        color: #333 !important;
+        font-size: 15px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        /* Icon bg  #2c3e50*/
+    }
+        .tab-label:hover {
+            background: #e2c1f6;
+        }
+</style>
+<div id="emp-t6" class="tab-pane">
+
+    <div ng-controller="employeePerformanceController">
+
+        <ul class="nav nav-pills" style="list-style-type: none !important">
+            <li  class="active-btn"><a data-toggle="pill" href="#employeePerformance" >Employee</a></li>
+            <li  ng-if="isManagerPerformanceTabVisible">
+                <a class="round-button waves-effect" data-toggle="pill" href="#managerPerformance"><i class="fa fa-user-circle"></i>&nbsp;Manager</a>
+            </li>
+            <li style="width:300px">
+                <div class="form-group clearfix">
+                    <label style="margin-top: 10px;" class="col-md-3 col-sm-5 control-label" for="employee">Review</label>
+                    <div class="col-md-7 col-sm-7">
+                        <select class="form-control" id="employee" ng-change="onReviewChange(selectedReview)" ng-model="selectedReview" ng-options="rev.text for rev in ReviewNames">
+                            <option>--- Select ---</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="employeePerformance"  class="tab-pane fade in active">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <th>Employee Name</th>
+                                    <th>Reporting Manager</th>
+                                    <th>Review Name</th>
+                                    <th>Over All Score</th>
+                                    <th>Review Date</th>
+                                    <th>Edit</th>
+                                    <th>Share</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="performance in EmpMgrPerformanceReview">
+                                <tr>
+                                    <td>{{performance.EmployeeName}}</td>
+                                    <td>{{performance.ManagerName}}</td>
+                                    <td>{{performance.ReviewTitle}}</td>
+                                    <td>{{performance.TotalScore}}</td>
+                                    <td>{{performance.ReviewCompletionDate | date:'MM/dd/yyyy'}}</td>
+                                    <td>
+                                        <a title="Edit" href="javascript:void(0)"
+                                           ng-click="OnEditEmpMgrReviewById(performance.PerformanceReviewID, performance.EmpReviewID)"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a title="Share to Manager" href="javascript:void(0)"><i class="fa fa-share"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tabs">
+                            <div class="employeeTab" style="box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5)" ng-repeat="s in EmployeeSegments">
+                                <label ng-click="expandEmployee(s)" class="tab-label" style="color: white">
+                                    {{s.SegmentName}}
+                                    <i ng-click="expandEmployee(s)" ng-class="(s.isCollapsed) ? 'fa fa-angle-double-down' : 'fa fa-angle-double-right'" class="pull-right"></i>
+                                </label>
+                                <div class="tab-content" ng-style="{'pointer-events': !isManagerPerformanceTabVisible ? 'all' : 'none'}" ng-if="s.isCollapsed" style="margin: 18px">
+                                    <div class="row" ng-repeat="q in s.tblPerformaceSegmentQuestions">
+                                        <div class="col-md-12">
+                                            <rzslider rz-slider-model="q.employeeRating" rz-slider-options="slider_ticks_values_tooltip.options"></rzslider>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group" style="padding: 8px;">
+                                                {{$index + 1}}. <label style="color: #000;" for="comment">{{q.Question}}&nbsp;<i class="fa fa-question"></i></label>
+                                                <textarea class="form-control" ng-model="q.Answer" rows="5" id="managerAnswer"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 p-t-10" ng-if="!isManagerPerformanceTabVisible">
+                        <input class="round-button waves-effects pull-right" ng-if="!isEdit" ng-click="onEmployeePerformanceSave()" type="button" value="Save">
+                        <input class="round-button waves-effect pull-right" ng-if="isEdit" ng-click="onEmployeePerformanceSave()" type="button" value="Update">
+                        <input class="round-button waves-effect pull-right" ng-if="isEdit" ng-click="OnEmployeePerformanceCancel()" type="button" value="Reset" style="margin-right:10px;">
+                    </div>
+                </div>
+            </div>
+            <div id="managerPerformance" ng-if="isManagerPerformanceTabVisible" style="margin: 3%" class="tab-pane fade">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <th>Employee Name</th>
+                                    <th>Reporting Manager</th>
+                                    <th>Review Name</th>
+                                    <th>Over All Score</th>
+                                    <th>Review Date</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="performance in MgrPerformanceReview">
+                                <tr>
+                                    <td>{{performance.EmployeeName}}</td>
+                                    <td>{{performance.ManagerName}}</td>
+                                    <td>{{performance.ReviewTitle}}</td>
+                                    <td>{{performance.TotalScore}}</td>
+                                    <td>{{performance.ReviewCompletionDate | date:'MM/dd/yyyy'}}</td>
+                                    <td>
+                                        <a title="Edit" href="javascript:void(0)"
+                                           ng-click="OnEditMgrReviewById(performance.PerformanceReviewID, performance.MgrReviewID)"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tabs">
+                            <div class="tab" ng-repeat="ms in ManagerSegments">
+                                <label ng-click="expandManager(ms)" class="tab-label" style="color: white">
+                                    {{ms.SegmentName}}
+                                    <i ng-click="expandManager(ms)" ng-class="(ms.isCollapsed) ? 'fa fa-angle-double-down' : 'fa fa-angle-double-right'" class="pull-right"></i>
+                                </label>
+                                <div class="tab-content" ng-if="ms.isCollapsed" style="margin: 18px">
+                                    @*<div class="row">
+                                        <rzslider rz-slider-model="ms.rating" rz-slider-options="slider_ticks_values_tooltip.options"></rzslider>
+                                    </div>*@
+
+                                    <div class="row" ng-repeat="mq in ms.tblPerformaceSegmentQuestions">
+                                        <div class="col-md-12">
+                                            <rzslider rz-slider-model="mq.managerRating" rz-slider-options="slider_ticks_values_tooltip1.options"></rzslider>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group" style="padding: 8px;">
+                                                {{$index + 1}}. <label style="color: #4285f4;" for="comment">{{mq.Question}}&nbsp;<i class="fa fa-question"></i></label>
+                                                <textarea class="form-control" ng-model="mq.Answer" rows="5" id="comment"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 p-t-10">
+                        <input class="round-button waves-effect" ng-if="!isMgrEdit" ng-click="onManagerPerformanceSave()" type="button" value="Savess">
+                        <input class="round-button waves-effect" ng-if="isMgrEdit" ng-click="onManagerPerformanceSave()" type="button" value="Update">
+                        <input  class="round-button waves-effect" ng-if="isMgrEdit" ng-click="onManagerPerformanceCancel()" type="button" value="Reset">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <modal-dialog show="modalShown" message="Successfully" width="600px" height="200">
+            <div>
+                <h4>Notification</h4>
+                <br />
+                <p>{{Message}}</p>
+            </div>
+        </modal-dialog>
+    </div>
+</div>

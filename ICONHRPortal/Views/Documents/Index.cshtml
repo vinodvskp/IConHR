@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div ng-controller="documentController">
+    <input type="hidden" id="hdnScreenName" value="companyScreen" />
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container">
+                <div class="pageheader">
+
+                    <h2>Documents </h2>
+
+                    <div class="page-bar">
+
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <a href="index.html"><i class="fa fa-home"></i> Icon HR</a>
+                            </li>
+                            <li>
+                                <a href="#">Documents</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" ng-hide="true">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                My Documents
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" ng-hide="true" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <a class="doc-icon" data-toggle="modal" data-target="#emp-fileuplode-modal" href="javascript:void(0)"><i class="fi-file-add" title="Upload a Document" style="text-decoration:underline;"></i></a>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Title</th>
+                                                            <th>Description</th>
+                                                            <th>Uploaded By</th>
+                                                            <th>Uploaded On</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="m in getDocuments">
+                                                        <tr>
+                                                            <td>
+                                                                {{m.Title}}
+                                                            </td>
+                                                            <td>
+                                                                {{m.Description}}
+                                                            </td>
+                                                            <td>{{m.CreatedBy}}</td>
+                                                            <td>{{m.DocumentAddedDate | date : 'MM/dd/yyyy'}}</td>
+                                                            <td>
+                                                                <a ng-click="onDownload(m.FilePath)" href="{{m.FilePath}}"><i class="fa fa-download"></i></a>
+                                                                <a href=""><i class="fa fa-trash"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--1-->
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Company Documents
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            <a class="doc-icon" data-toggle="modal" data-target="#emp-fileuplode-modal" href="javascript:void(0)"><i class="fi-file-add" title="Upload a Document" style="text-decoration:none;"></i>&nbsp;Upload a Document</a>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Title</th>
+                                                            <th>Description</th>
+                                                            <th>Uploaded By</th>
+                                                            <th>Uploaded On</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="m in getDocuments">
+                                                        <tr>
+                                                            <td>
+                                                                {{m.Title}}
+                                                            </td>
+                                                            <td>
+                                                                {{m.Description}}
+                                                            </td>
+                                                            <td>{{m.CreatedBy}}</td>
+                                                            <td>{{m.DocumentAddedDate | date : 'MM/dd/yyyy'}}</td>
+                                                            <td>
+                                                                <a ng-click="onDownload(m.FilePath)" href="{{m.FilePath}}"><i class="fa fa-download"></i></a>
+                                                                <a href=""><i class="fa fa-trash"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--2-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- container -->
+    </div> <!-- content -->
+    <!--File Upload-->
+    <form  name="form" role="form" id="form" xt-form class="edit-form" novalidate>
+    <div id="emp-fileuplode-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Upload Documents</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title" class="label-control  required">Title</label>
+                        <input type="text" id="title" name="title" placeholder="" ng-model="document.Title" required class="form-control">
+                        <xt-validation-inline for="title"></xt-validation-inline>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="label-control  required">Description</label>
+                        <textarea id="description" name="description" class="form-control" ng-model="document.Description" required style="overflow:auto;resize:none;height:50px;"></textarea>
+                        <xt-validation-inline for="description"></xt-validation-inline>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control  required">File</label>
+                        <div class="input-group file-upload-block">
+                            <input class="form-control" type="text" title="" readonly placeholder="Select a File">
+                            <span class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                    Browse
+                                    <input type="file" id="txtUpload" name="txtUpload" required ngf-select="UploadFiles($files)" multiple>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control ">Share with</label>
+                        <div class="clearfix">
+                            <label class="checkbox-inline checkbox checkbox-custom-alt">
+                                <input type="checkbox" id="inlineCheckbox1" ng-model="document.IsCompanyAccessOnly"><i></i> Employees
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="round-button waves-effect" data-dismiss="modal" type="reset">Cancel</button>
+                        <button class="round-button waves-effect" ng-click="onDocumentSave(form)" type="submit">Submit</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+            <modal-dialog show="modalShown" message="Successfully" width="600px" height="200">
+                <div>
+                    <h4>Notification</h4>
+                    <br />
+                    <p>{{Message}}</p>
+                </div>
+            </modal-dialog>
+        </div>
+    </div>
+    </form>
+</div>

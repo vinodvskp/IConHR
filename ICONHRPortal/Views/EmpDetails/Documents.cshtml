@@ -1,0 +1,103 @@
+﻿
+<div id="emp-t4" class="tab-pane" ng-controller="documentController">
+    <!--<h3>Document Information </h3>
+    <hr />-->
+    <div class="note-content">
+        <div class="row">
+            <a class="doc-icon" data-toggle="modal" data-target="#emp-fileuplode-modal" href="javascript:void(0)"><i class="fi-file-add" title="Upload a Document" style="text-decoration:none"></i>&nbsp;Upload Documents</a>
+            <div class="table-responsive">
+                <table class="table table-bordered m-0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Uploaded By</th>
+                            <th>Uploaded On</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="m in getDocuments">
+                        <tr>
+                            <td>
+                                {{m.Title}}
+                            </td>
+                            <td>
+                                {{m.Description}}
+                            </td>
+                            <td>{{m.CreatedBy}}</td>
+                            <td>{{m.DocumentAddedDate | date : 'MM/dd/yyyy'}}</td>
+                            <td>
+                                <a ng-click="onDownload(m.FilePath)" href="{{m.FilePath}}"><i class="fa fa-download"></i></a>
+                                <a href=""><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="emp-fileuplode-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Upload Documents</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="form" role="form" id="form" xt-form class="edit-form" novalidate>
+                        <div class="form-group">
+                            <label for="title" class="label-control">Title</label>
+                            <input type="text" id="title" name="title" required ng-model="document.Title" placeholder="" class="form-control">
+                            @*<xt-validation-inline for="title"></xt-validation-inline>*@
+                            <div ng-messages="form.title.$error">
+                                <xt-validation-inline for="title"></xt-validation-inline>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="label-control">Description</label>
+                            <textarea class="form-control" required id="description" name="description" ng-model="document.Description" style="overflow: auto; resize: none; height: 50px;"></textarea>
+                            @*<xt-validation-inline for="description"></xt-validation-inline>*@
+                            <div ng-messages="form.description.$error">
+                                <xt-validation-inline for="description"></xt-validation-inline>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">File</label>
+                            <div class="input-group file-upload-block">
+                                <input class="form-control" type="text" title="" readonly placeholder="Select a File">
+                                @*<input type="file" id="txtUpload" name="txtUpload"  ngf-select="UploadFiles($files)" class="form-control">*@
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        Browse
+                                        <input type="file" id="txtUpload" name="txtUpload" ngf-select="UploadFiles($files)" multiple>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">Share with</label>
+                            <div class="clearfix">
+                                <label class="checkbox-inline checkbox checkbox-custom-alt">
+                                    <input type="checkbox" id="inlineCheckbox1" value="option1"><i></i> Employees
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="round-button waves-effect" type="submit">Cancel</button>
+                            <button class="round-button waves-effect" ng-click="onDocumentSave(form)" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->]
+            </div><!-- /.modal-dialog -->
+            <modal-dialog show="modalShown" message="Successfully" width="600px" height="200">
+                <div>
+                    <h4>Notification</h4>
+                    <br />
+                    <p>{{Message}}</p>
+                </div>
+            </modal-dialog>
+        </div>
+    </div>
+
+</div>

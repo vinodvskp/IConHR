@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutPlain.cshtml";
+}
+
+@{
+    var PwdValidation = @"/^(?=.*\d)(?=.*\w)(?=.*\w)(?=.*[#$!@@%^&*()_+=-]).{8,}$/";
+}
+
+
+
+<div class="col-lg-8 col-md-6 col-sm-7 emp-reg col-md-offset-2" ng-controller="addEmployeeController">
+    <form name="RegistrationForm" novalidate>
+        <div class=" clearfix">
+            <h1>Free 14 Day Trial</h1>
+            <p style="font-size:14px;font-weight:bold;margin-bottom:50px;">Find out how Icon can help you manage your workforce more efficiently, with a 14 day free trial</p>
+            <div class="row">
+                <span id="errorMsg" style="color:red;"></span>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtFirstName" id="txtFirstName" ng-model="employeeDetail.FirstName" ng-maxlength="30" required placeholder="First Name">
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtFirstName.$dirty" ng-messages="RegistrationForm.txtFirstName.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">First Name is required</div>
+                        <div ng-message="maxlength">First Name is too long</div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtLastName" id="txtLastName" ng-model="employeeDetail.LastName" ng-maxlength="30" required placeholder="Last Name">
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtLastName.$dirty" ng-messages="RegistrationForm.txtLastName.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Last Name is required</div>
+                        <div ng-message="maxlength">Last Name is too long</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtEmail" id="txtEmail" ng-model="employeeDetail.EmailID" ng-maxlength="30" ng-pattern="/^[^\s]+[^\s]+\.[^\s]{2,}$/" required placeholder="Email ID">
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtEmail.$dirty" ng-messages="RegistrationForm.txtEmail.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Email ID is required</div>
+                        <div ng-message="maxlength">Email ID is too long</div>
+                        <div ng-message="pattern">Please enter valid Email ID</div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtPhone" id="txtPhone" ng-model="employeeDetail.PhoneNumber" placeholder="Mobile Number" ng-maxlength="20" ng-pattern="/^(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$/" required />
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtPhone.$dirty" ng-messages="RegistrationForm.txtPhone.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Mobile Number is required</div>
+                        <div ng-message="maxlength">Mobile Number is too long</div>
+                        <div ng-message="pattern">Please enter valid Mobile Number(allows UK format only)</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-sm-6">
+
+                    <input type="password" class="form-control" name="txtPassword" id="txtPassword" ng-model="employeeDetail.Password" ng-maxlength="20" placeholder="Password" ng-pattern="@PwdValidation" required />
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtPassword.$dirty" ng-messages="RegistrationForm.txtPassword.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Password is required</div>
+                        <div ng-message="maxlength">Password Number is too long</div>
+                        <div ng-message="pattern">Minimum 8 characters at least 1 Alphabet, 1 Number and 1 Special Character</div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="txtConfirmPassword" id="txtConfirmPassword" ng-model="employeeDetail.ConfirmPassword" compare-to="employeeDetail.Password" required />
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtConfirmPassword.$dirty" ng-messages="RegistrationForm.txtConfirmPassword.$error" ng-messages-include="~/messages.html" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Confirm Password is required</div>
+                        <div ng-message="compareTo">Must match the Password</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtCompanyName" id="txtCompanyName" ng-model="employeeDetail.CompanyName" ng-maxlength="40" required placeholder="Company Name">
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtCompanyName.$dirty" ng-messages="RegistrationForm.txtCompanyName.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Company Name is required</div>
+                        <div ng-message="maxlength">Company Name is too long</div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtLocation" id="txtLocation" ng-model="employeeDetail.Location" ng-maxlength="240" required placeholder="Location">
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtCompanyName.$dirty" ng-messages="RegistrationForm.txtLocation.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Location is required</div>
+                        <div ng-message="maxlength">Location is too long</div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+
+                    <input type="text" class="form-control" name="txtCompanyUrl" id="txtCompanyUrl" ng-model="employeeDetail.CompanyUrl" ng-maxlength="350" required placeholder="Company Url">
+                    <span style="color: blue;">/amagos.com</span>
+                    <div ng-if="RegistrationForm.$submitted || RegistrationForm.txtCompanyName.$dirty" ng-messages="RegistrationForm.txtCompanyUrl.$error" style="color:red" ng-cloak role="alert">
+                        <div ng-message="required">Company Url is required</div>
+                        <div ng-message="maxlength">Company Url is too long</div>
+                    </div>
+                </div>
+                @*<div class="form-group col-md-6">
+                    <label class="col-md-12 control-label required " for="confirm">Job Role</label>
+                    <div class="col-md-12">
+                        <select class="form-control" required id="txtJobRole" name="txtJobRole" ng-model="selectedJobRole">
+                            <option>Select</option>
+                            <option value="1">Software engineer</option>
+                            <option value="2">Systems analyst</option>
+                            <option value="3">Business analyst</option>
+                            <option value="4">Technical support</option>
+                            <option value="5">Network engineer</option>
+                            <option value="6">Technical consultant</option>
+                            <option value="7">Technical sales</option>
+                            <option value="8">HR</option>
+                        </select>
+                    </div>
+                </div>*@
+                <div class="form-group col-sm-6">
+                    <p>How many employees do you have?</p>
+                    <label class="checkbox checkbox-custom-alt radio-inline"><input type="radio" name="rblCompSize" id="rblSmall" value="1-99" checked><i></i>1-99</label>
+                    <label class="checkbox checkbox-custom-alt radio-inline"><input type="radio" name="rblCompSize" id="rblMedium" value="100-249"><i></i>100-249</label>
+                    <label class="checkbox checkbox-custom-alt radio-inline"><input type="radio" name="rblCompSize" id="rblLarge" value="Over 250"><i></i>Over 250</label>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group form-group-bt clearfix">
+                <p>Already have an account? <a href="/Login" class="align-center registration-loginlnk" style="">Sign in​</a></p>
+                <input type="submit" class="round-button waves-effect" ng-click=" AddNewEmployee()" value="Next">
+            </div>
+        </div>
+    </form>
+</div>

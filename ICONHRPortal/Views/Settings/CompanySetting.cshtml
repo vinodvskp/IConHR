@@ -1,0 +1,140 @@
+﻿<div id="settingt3" class="tab-pane" ng-controller="companySettingsController">
+    <!-- <h3>Company </h3>
+     <hr />-->
+    <form name="formCompany" role="form" id="formCompany" class="edit-form" novalidate>
+        <div class="form-group col-md-6">
+            <label class="col-md-12 label-control required "  >Upload Logo</label>
+            <div class="col-md-12 ">
+                <div class="input-group file-upload-block">
+                    <input class="form-control" type="text" required id="txtUploadLogo" name="txtUploadLogo" title="Upload the Data, please check the sample file for the format" readonly placeholder="Upload company logo">
+                    <span class="input-group-btn">
+                        <span class="btn btn-primary btn-file">
+                            Browse
+                            <input type="file" id="txtCompanyLogo" name="txtCompanyLogo" ngf-select="UploadFiles($files)" class="form-control">
+                        </span>
+                    </span>
+                </div>
+                @*<select class="form-control" ng-model="selectedUploadLogo">
+                    <option value="-2">All</option>
+                    <option value="5325870">Head Office</option>
+                    <option value="-1">+(Manage This List)</option>
+                </select>*@
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-md-12 label-control required "  >Company Statement</label>
+            <div class="col-md-12">
+                <input id="confirm" name="confirm" type="text" ng-model="companySetting.CompanyStatement" required class="form-control">
+            </div>
+        </div>
+        <div class="container" style="padding:0px;">
+            <div class="form-group col-md-6">
+                <label class="col-md-12 label-control required "  >Industry</label>
+                <div class="col-md-12">
+                    <select class="form-control" id="ddlIndustry" name="ddlIndustry" required ng-model="selectedIndustry" ng-options="ind.text for ind in industries" ng-change="onIndustryTypeChange(selectedIndustry)">
+                        @*<option value="1">IT</option>
+                        <option value="2">Infrastructure</option>
+                        <option value="3">Medical</option>*@
+                        <option value="">--- Select ---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-6  addlocation-input" ng-if="canIndustryAdd">
+                <label class="col-md-12 label-control required " for="txtIndustry"></label>
+                <div class="col-md-8">
+
+                    <input type="text" ng-model="companySetting.industryType" class="form-control" id="txtIndustry" />
+
+                </div>
+                <div class="col-md-4 ">
+                    <div>
+                        <button class="round-button waves-effect btn-sm" ng-click="onIndustryTypeSave()" type="button">+ Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label class="col-md-12 label-control required "  >Date Format</label>
+            <div class="col-md-12">
+                <select class="form-control" id="ddlDateFormat" name="ddlDateFormat" required ng-selected="selectedDateFormat.text == ind.text" ng-model="selectedDateFormat" ng-options="ind.text for ind in dateFormates">
+                    @*<option value="1">dd/mm/yyyy</option>
+                    <option value="2">mm/dd/yyyy</option>
+                    <option value="3">yyyy/mm/dd</option>*@
+                    <option value="">--- Select ---</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label class="col-md-12 label-control required "  >Currency Format</label>
+            <div class="col-md-12">
+                <select  id="ddlCurrencyFormat" name="ddlCurrencyFormat" class="form-control" ng-model="selectedCurrency" required ng-options="cur.text for cur in currencys">
+                    @*<option value="1">$</option>
+                    <option value="2">Rs</option>
+                    <option value="3">Pound</option>*@
+                    <option value="">--- Select ---</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label class="col-md-12 label-control required "  >NI/SSN Validation</label>
+            <div class="col-md-12">
+                <input id="txtNISSn" name="txtNISSn" type="text" required class="form-control" ng-model="companySetting.NI_SSNValidation">
+            </div>
+        </div>
+        <div class="form-group col-md-6 ">
+            <label class="col-md-12 label-control required "  >Probation Period</label>
+            <div class="col-md-12" style="padding:0px;">
+                <div class="col-md-4">
+                    <input id="txtProbationPeriod" name="txtProbationPeriod" required type="text" ng-model="companySetting.ProbationPeriod" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <span class="input-group-btn1">
+                        <label class="checkbox checkbox-custom-alt">
+                            <input id="rdMonth" name="rbNotice" checked="checked" class="btn btn-warning btn-reset" ng-model="companySetting.Month" type="radio"><i></i>Month
+                        </label>
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <span class="input-group-btn1">
+                        <label class="checkbox checkbox-custom-alt">
+                            <input id="rdMonth" name="rbNotice" class="btn btn-warning btn-reset" ng-model="companySetting.Week" type="radio"><i></i>Weeks
+                        </label>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group col-md-6 ">
+            <label class="col-md-12 label-control required "  >Password Expiry Duration</label>
+            <div class="col-md-12">
+                <input id="txtpasswordExpire" name="txtpasswordExpire" required type="text" ng-model="companySetting.PasswordExpiryDuration" class="required form-control">
+            </div>
+        </div>
+        <div class="form-group col-md-6 ">
+            <label class="col-md-12 label-control required "  >Session Timeout Period</label>
+            <div class="col-md-12">
+                <input id="txtSessionTimePeriod" name="txtSessionTimePeriod" type="text" required ng-model="companySetting.SessionTimeOutPeriod" class="required form-control">
+            </div>
+        </div>
+
+
+        <div class="col-md-12" style="text-align:center;">
+
+            <div class="input-group input-file" name="Fichier1">
+                <button class="round-button waves-effect" ng-click="onCompanySettingSave(formCompany)" type="submit">Save</button>
+
+            </div>
+        </div>
+
+        <modal-dialog show="modalShown" message="Successfully" width="600px" height="200">
+            <div>
+                <h4>Notification</h4>
+                <br />
+                <p>{{Message}}</p>
+            </div>
+        </modal-dialog>
+    </form>
+</div>

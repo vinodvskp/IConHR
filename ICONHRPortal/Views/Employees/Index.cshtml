@@ -1,0 +1,601 @@
+﻿@using ICONHRPortal.Extensions
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<script>
+
+
+    var $con = jQuery.noConflict();
+
+    $con(document).ready(function () {
+
+
+        $con(".employees-tab").css('display', 'none');
+        $con("a.empname-click").click(function () {
+            $con(".employees-table").css('display', 'none');
+            $con(".employees-tab").css('display', 'block');
+        });
+
+        $con("a.empback-link-text").click(function () {
+            $con(".employees-tab").css('display', 'none');
+            $con(".employees-table").css('display', 'block');
+        });
+
+        $con('#datepickerDOB, #datepickerStartDate').datepicker({
+            format: "dd/mm/yyyy",
+            todayHighlight: true,
+            autoclose: true
+        });
+
+    });
+
+    
+
+</script>
+<style>
+    .ui-grid-cell-contents {
+        text-align: center !important;
+        white-space: normal;
+    }
+</style>
+
+<input type="hidden" id="hdnScreenName" value="employeeScreen" />
+<input type="hidden" id="hdnScreen" value="me" />
+
+<!-- Left Sidebar End -->
+<div class="content-page allemployees" ng-controller="addEmployeeController">
+    <div class="content">
+        <div class="container">
+            <!-- heading breadcrumb -->
+            <div class="pageheader">
+
+                <h2>Employees </h2>
+
+                <div class="page-bar">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home"></i> Icon HR</a>
+                        </li>
+                        <li>
+                            <a href="#" class="active">Employees</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- heading breadcrumb -->
+            <!--employees-table -->
+            <div class="employees-table" ng-if="employeeTableVisibility">
+                <div class="panel-section">
+                    <button type="button" data-toggle="collapse" data-target="#vert-empl"
+                            class="btn-sm visible-xs visible-sm collapsed btn-default btn btn-block m-t-sm">
+                        All notes
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="alert alert-warning">
+                            <strong>Select an employee</strong> Use the screen on the right to select the employee you want to work with. Alternatively, you can add a new employee. </em>.
+                        </div>
+
+                        @*<ul>
+                                <li class="active"><a href="#emp-t1" data-toggle="tab">Overview</a></li>
+                                <li><a href="#emp-t2" data-toggle="tab" ng-click="tabClick(2)">Timesheets</a></li>
+                                <li><a href="#emp-t3" data-toggle="tab">Planner</a></li>
+                                <li><a href="#emp-t4" data-toggle="tab">Documents</a></li>
+                                <li><a href="#emp-t5" data-toggle="tab">Logbook</a></li>
+                            </ul>*@
+                    </div>
+                    <div class="col-md-12" ng-cloak>
+
+                        <div class="hpanel">
+                            <div class="panel-body employees-right">
+                                <div class="tab-content">
+                                    <div id="emplo1" class="tab-pane active">
+                                        <div class="tab-content">
+                                            <div class="user-txt" style="width:100%;">
+                                                <a data-toggle="modal" data-target="#useradd-modal" href="javascript:void(0)"><img class="img-responsive user-add-icon" src="~/Images/user-add-icon.png" alt="" />Add New Employee Details</a>
+                                            </div>
+                                            <div class="table-responsive" style="width:100%;float:left;">
+
+                                                <div id="grid1" ui-grid="gridOptions"  class="grid"></div>
+
+
+                                            </div>
+                                                @*<div class="table-responsive" style="width:100%;float:left;">
+                <table class="table table-bordered m-0">
+                    <thead>
+                        <tr>
+                            <th>Emp ID</th>
+                            <th>Name </th>
+                            <th>Email</th>
+                            <th>Job Role</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="emp in EmployeeList">
+                        <tr>
+                            <td><a href="#" ng-click="OnEdit(emp)" style="text-decoration:underline;">{{emp.EmpID}}</a></td>
+                            <td>{{emp.EmpName}}</td>
+                            <td>{{emp.EmailID}}</td>
+                            <td>{{emp.JobRoleID}}</td>
+                            <td>{{emp.LocationID}}</td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>*@
+                                            </div>
+                                        </div>
+                                    @Html.Partial("~/Views/EmpDetails/Documents.cshtml")
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--employees-table -->
+            <!--employees-tab -->
+            <div class="employees-tab" ng-if="!employeeTableVisibility" >
+                <div class="panel-section">
+                    <button type="button" data-toggle="collapse" data-target="#vert-empl"
+                            class="btn-sm visible-xs visible-sm collapsed btn-default btn btn-block m-t-sm">
+                        All notes
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs nav-justified   menu-tabs">
+                            <li class="active"><a href="#emp-t1" data-toggle="tab">Overview</a></li>
+                            <li><a href="#emp-t2" data-toggle="tab" ng-click="tabClick('reprtManager')">Timesheets</a></li>
+                            <li><a href="#emp-t3" data-toggle="tab">Planner</a></li>
+                            <li><a href="#emp-t4" data-toggle="tab">Documents</a></li>
+                            <li><a href="#emp-t5" data-toggle="tab" ng-click="tabClick(5)">Logbook</a></li>
+                            <li><a href="#emp-t6" data-toggle="tab">Performance</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="container page-borders">
+                        <div class="col-md-2 employees-left">
+                            <div class="hpanel panel-group">
+                                <div class="slimscroll-menu">
+                                    <div id="vert-empl" class="tile-widget  text-center">
+                                        <div class="thumb thumb-xl">
+                                            <!--<a class="empback-link-text" ng-click="onEmployeeBack()"><i class="fi fi-rewind"></i> Back Employees</a>-->
+                                            <img class="img-circle img-responsive center-block" src="~/Images/user.png" alt="user image" />
+                                            <h4 ng-bind="selectedEmployye.EmpName"></h4>
+                                            <a href="" class="round-button waves-effect">Employee</a>
+                                        </div>
+                                        <a class="empback-link-text" style="margin-top:16px" ng-click="onEmployeeBack()"><i class="fi fi-rewind"></i> Back Employees</a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="hpanel">
+                                <div class="panel-body employees-right">
+                                    <div class="text-center hidden">We couldn't find any notes for you.</div>
+                                    <div class="tab-content">
+                                        <div id="emp-t1" class="tab-pane active">
+                                            <div class="row">
+                                                <div class="form-group label-text col-lg-5 col-md-6">
+                                                    <label class="label-control">Emp Name: <span ng-bind="selectedEmployye.EmpName">18-Jan-2018</span></label>
+                                                    <label class="label-control">Department: <span></span>IT</label>
+                                                    <label class="label-control">Email:  <span ng-bind="selectedEmployye.EmailID">vinodkumar@gmail.com</span></label>
+                                                </div>
+                                                <div class="form-group label-text col-lg-7 col-md-6">
+                                                    <label class="label-control">Location: <span>Hyderabad</span></label>
+                                                    <label class="label-control">Contracted Hours: <span ng-bind="selectedEmployye.ContractedHours">1000</span></label>
+                                                    <label class="label-control">Mobile: <span ng-bind="selectedEmployye.PhoneNumber">1234567897</span></label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div id="emp-t2" class="tab-pane">
+                                            <!--<h3>Heading</h3>
+                                            <hr />-->
+                                            <div id="emplo1" class="tab-pane active">
+                                                <div class="form-group clearfix label-formcontrol">
+                                                    <label class="control-label" for="confirm">Date</label>
+                                                    <input id="confirm" name="confirm" type="text" value="Date" disabled class="form-control width-200">
+                                                </div>
+                                                @*<div id="grid2" ui-grid-auto-resize ui-grid="timesheetGridOptions" class="grid"></div>*@
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered m-0">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Project</th>
+                                                            <th>Task</th>
+                                                            <th>Details</th>
+                                                            <th>Start Time</th>
+                                                            <th>End Time</th>
+                                                            <th>Quantity</th>
+                                                            <th>Hours</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody ng-repeat="timeSheet in EmployeeTimeSheetList">
+                                                        <tr>
+                                                            <td><a ng-click="getTimeSheet(timeSheet)">{{timeSheet.Project}}</a></td>
+                                                            <td>{{timeSheet.Task}}</td>
+                                                            <td>{{timeSheet.Details}}</td>
+                                                            <td>{{timeSheet.StartDate | date:'MM/dd/yyyy'}}</td>
+                                                            <td>{{timeSheet.EndDate | date:'MM/dd/yyyy'}}</td>
+                                                            <td>{{timeSheet.Quantity}}</td>
+                                                            <td>{{timeSheet.TotalHours}}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="form-group clearfix col2-formcontrol">
+                                                    <div class="pull-right">
+                                                        <label class="control-label">Total</label>
+                                                        <input name="confirm" type="text" value="Date" class="form-control width-150">
+                                                        <input name="confirm" type="text" value="Date" class="form-control width-150">
+                                                    </div>
+                                                </div>
+
+                                                <div class="actions-bt clearfix">
+                                                    <div class="pull-right">
+                                                        <button type="button" class="round-button waves-effect" data-toggle="modal" data-target="#timesheet-addnew-modal">Add New</button>
+                                                        <button type="button" class="round-button waves-effect">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="emp-t3" class="tab-pane">
+                                            @*<div class="card-box clearfix">
+                                                    <div id="calendar"></div>
+                                                </div>*@
+                                            @Html.Partial("~/Views/EmpDetails/Planner.cshtml")
+                                        </div>
+
+                                        <div id="emp-t4" class="tab-pane">
+                                            <h3>Upload Documents</h3>
+                                            <hr />
+                                            <div class="note-content">
+                                                @Html.Partial("~/Views/EmpDetails/Documents.cshtml")
+                                            </div>
+                                        </div>
+
+                                        <div id="emp-t5" class="tab-pane">
+                                            <h3>Employee Log Book </h3>
+                                            <hr />
+                                            <div class="note-content">
+                                                @Html.Partial("~/Views/EmpDetails/_PartialEmployeeLogBook.cshtml")
+                                            </div>
+                                        </div>
+                                        <div id="emp-t6" class="tab-pane">
+                                            <hr />
+                                            <div class="note-content">
+                                                @Html.Partial("~/Views/EmpDetails/Performance.cshtml")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!--col-->
+                    </div>
+                </div>
+            </div>
+            <!--employees-tab -->
+        </div>
+    </div> <!-- content -->
+    <!--USER add-->
+    <div id="useradd-modal" class="modal fade modal-style wizard-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg pop-newemploye">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">New Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-sm-12" style="margin-bottom:0px;">
+                        <p>Fill in the fields on each screen to create an employment record for a new starter within your business.</p>
+                    </div>
+
+                    <form id="basic-form" name="basicform" novalidate ng-submit="submit(basicform)">
+                        <div id="divSteps">
+                            <h3>Personal Information</h3>
+                            <section>
+
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required" for="txtFirstName">First Name</label>
+                                    <div class="col-md-12">
+                                        <input id="txtFirstName" name="txtFirstName" type="text" class="required form-control" ng-model="employeeDetail.FirstName" required>
+                                        @*<xt-validation-inline for="username"></xt-validation-inline>*@
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Last Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="required form-control" id="txtLastName" name="txtLastName" ng-model="employeeDetail.LastName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Email</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="required form-control" id="txtEmail" name="txtEmail" ng-model="employeeDetail.EmailID" required ng-pattern="eml_add">
+                                        <span class="red-text" ng-show="basicform.txtEmail.$error.pattern">Invalid Email</span>
+                                    </div>
+                                </div>
+                                @*<div class="form-group clearfix">
+                <label class="col-md-3 control-label required " for="confirm">Password</label>
+                <div class="col-md-9">
+                    <input type="password" name="EPassword" ng-model="employeeDetail.Password" required class="form-control" />
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-md-3 control-label required " for="confirm">Confirm Password</label>
+                <div class="col-md-9">
+
+                    <input type="password" class="required form-control" id="txtConfmPwd" name="txtConfmPwd" ng-model="employeeDetail.Password">
+
+                </div>
+            </div>*@
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Mobile Number</label>
+                                    <div class="col-md-12">
+                                        <input type="number" class="required form-control" id="txtMobileNum" name="txtMobileNum" ng-model="employeeDetail.PhoneNumber" required ng-pattern="/^\+?\d{10}$/">
+                                        <span class="red-text" ng-show="basicform.txtMobileNum.$error.pattern">Please enter a 10 digit number</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Gender</label>
+                                    <div class="col-md-12">
+                                        <label class="checkbox checkbox-custom-alt radio-inline"><input ng-model="employeeDetail.Gender" type="radio" name="inlineRadioOptions" value="Male" checked><i></i>Male</label>
+                                        <label class="checkbox checkbox-custom-alt radio-inline"><input ng-model="employeeDetail.Gender" type="radio" name="inlineRadioOptions" value="Female"><i></i>Female</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Date of Birth</label>
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="input-group date" data-provide="datepicker" id="datepickerDOB">
+                                                <input type="text" class="form-control" id="txtDOB" ng-model="employeeDetail.DateOfBirth" required>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Profile Photo</label>
+                                    <div class="col-md-12">
+                                        <div class="input-group file-upload-block">
+                                            <input class="form-control" type="text" placeholder="Upload Profile Photo" title="" accept=".png,.jpg,.jpeg,.gif,.tif" ng-model="employeeDetail.ProfilePhoto">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-primary btn-file">
+                                                    Browse
+                                                    <input type="file" id="txtprofilePic" multiple>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label required " for="confirm">Address</label>
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" name="txtAddress" id="txtAddress" required style="overflow:auto;resize:none;height:80px;" ng-maxlength="200" ng-model="employeeDetail.Address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required" for="confirm">Country</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control select2" required ng-model="employeeDetail.CountryID">
+                                            <option value="">Select</option>
+                                            <option value="CT">INDIA</option>
+                                            <option value="DE">UK</option>
+                                            <option value="FL">USA</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Post Code</label>
+                                    <div class="col-md-12">
+                                        <input id="confirm" name="confirm" required type="text" class="required form-control" ng-model="employeeDetail.PostalCode">
+                                    </div>
+                                </div>
+                            </section>
+                            <h3>Job Information</h3>
+                            <section>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Contracted Hours</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="txtConHours" id="txtConHours" required ng-model="jobDetails.ContractedHours">
+                                    </div>
+                                </div>
+                                @*<div class="form-group col-md-6">
+            <label class="col-md-12 control-label required " for="confirm">Company</label>
+            <div class="col-md-12">
+                <input type="text" disabled class="form-control" required name="txtCompany" id="txtCompany" value="@User.Identity.GetCompanyName()" required>
+            </div>
+        </div>*@
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Location</label>
+                                    <div class="col-md-12">
+                                        @*<input type="text" class="form-control" name="txtLocation" id="txtLocation" required ng-model="jobDetails.LocationID">*@
+                                        <select class="form-control" required ng-model="selectedLocations" ng-options="loc.id  as loc.text for loc in Locations">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Department</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control select2" required id="ddlDept" ng-model="selectedDepartment" ng-options=" dept.id as dept.text for dept in getDepartments">
+
+                                            <option value="">Select</option>
+
+                                            @*<option>Select</option>
+                    <option value="1">FINANCE</option>
+                    <option value="2">HR</option>
+                    <option value="3">IT</option>
+                    <option value="4">Marketing</option>
+                    <option value="5">SALES</option>*@
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Job Role</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" required id="txtJobRole" name="txtJobRole" ng-model="selectedJobRole" ng-options="jRole.id as jRole.text for jRole in getJobRoles">
+                                            <option value="">Select</option>
+                                            @*<option>Select</option>
+                    <option value="1">Software engineer</option>
+                    <option value="2">Systems analyst</option>
+                    <option value="3">Business analyst</option>
+                    <option value="4">Technical support</option>
+                    <option value="5">Network engineer</option>
+                    <option value="6">Technical consultant</option>
+                    <option value="7">Technical sales</option>
+                    <option value="8">HR</option>*@
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Reports to</label>
+                                    <div class="col-md-12">
+                                        @*<select class="selectpicker form-control" data-live-search="true" id="ddlReportMgr" ng-model="jobDetails.RepMgrID">
+                    <option value="1">Vinod</option>
+                    <option value="2">Santhosh</option>
+                </select>*@
+                                        <select class="form-control" id="ddlReportMgr" ng-model="selectedReportManager" required ng-options="mgr.id as mgr.text for mgr in ReportingMangers">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Start Date</label>
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="input-group date" data-provide="datepicker" id="datepickerDOB">
+                                                <input type="text" required class="form-control" name="txtStartDate" id="txtStartDate" ng-model="jobDetails.EmpStartDate">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label required " for="confirm">Employment Type</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control select2" name="ddlEmploymentType" id="ddlEmploymentType" required ng-model="selectedEmployementType" ng-options="empType.id as empType.text for empType in getEmployementTypes">
+                                            <option value="">Select</option>
+                                            @*<option>Select</option>
+                    <option value="1">Contract</option>
+                    <option value="2">Full Time</option>*@
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </section>
+                      
+                        </div>
+                      
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <form name="form" role="form" id="frmValidation" class="edit-form" novalidate>
+        <!---TimeSheet-->
+        <div id="timesheet-addnew-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" id="TimeSheetPopup">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Assignment</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label class="label-control required">Project</label>
+                                <input type="text" placeholder="" name="txtProjectName" id="txtProjectName" ng-model="timeSheetDetail.Project" class="form-control" required>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="label-control required">Task</label>
+                                <input type="text" placeholder="" id="txtTask" name="txtTask" ng-model="timeSheetDetail.Task" class="form-control" required>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="label-control required">Details</label>
+                                <input type="text" placeholder="" id="txtDetails" name="txtDetails" ng-model="timeSheetDetail.Details" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group  col-sm-6">
+                                <label class="label-control required" for="confirm">Start Date & Time </label>
+                                <div class="input-group ">
+                                    <div class="input-group date" data-provide="datepicker" id="datepickerstart">
+                                        <input type='text' id="txtStartDate" name="txtStartDate" class="form-control date datetimepicker1" ng-model="timeSheetDetail.StartDate" required />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                    </div>
+                                    @*<input type='text' class="form-control date datetimepicker1" ng-model="timeSheetDetail.StartDate" />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="label-control required" for="confirm">End Date & Time</label>
+                                <div class="input-group">
+                                    <div class="input-group date" data-provide="datepicker" id="datepickerend">
+                                        <input id="txtEndDate" name="txtEnddate" type='text' class="form-control date datetimepicker1" ng-model="timeSheetDetail.EndDate" required />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                    </div>
+                                    @*<input type='text' class="form-control date datetimepicker1" ng-model="timeSheetDetail.EndDate" />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group  col-sm-6">
+                                <label class="label-control required" for="confirm">Total Hours</label>
+                                <input type="text" class="form-control " id="txtTotalHours" name="txtTotalHours" ng-model="timeSheetDetail.TotalHours" required>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="label-control required" for="confirm"> Quantity</label>
+                                <input type="text" placeholder="" name="txtQuantity" id="txtQuantity" ng-model="timeSheetDetail.Quantity" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label class="label-control required">Notes</label>
+                                <textarea class="form-control" name="txtNotes" id="txtNotes" ng-model="timeSheetDetail.Notes" rows="3" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="reset" class="btn-default waves-effect" ng-click="clear(form)">Cancel</button>
+                            <button type="submit" class="round-button waves-effect" ng-click="timeSheetSubmit(form)"> Submit</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+    </form>
+</div>
+

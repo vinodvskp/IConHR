@@ -1,0 +1,130 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ICON HR</title>
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link href="~/Styles/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Styles/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Styles/css/Home/slick.css" rel="stylesheet" />
+    <link href="~/Styles/css/Home/home-style.css" rel="stylesheet" />
+    <link href="~/Styles/css/Home/home-responsive.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/scripts/slick.min.js"></script>
+    <script src="~/scripts/angular.js"></script>
+    @*<script src="~/AngularJS/Module.js"></script>
+        <script src="~/AngularJS/Controller.js"></script>
+        <script src="~/AngularJS/Service.js"></script>*@
+    <script src="~/Scripts/angular-messages.js"></script>
+    <script src="~/scripts/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-touch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.8.1/ui-grid.min.js"></script>
+    <script src="~/scripts/xtForm.tpl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/7.0.0/rzslider.js"></script>
+    @*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>*@
+    @*@Scripts.Render("~/bundles/app")*@
+</head>
+<body>
+    <div>
+        @RenderBody()
+        <footer>
+            <div class="footer-wrapp">
+                <div class="container footer-inner">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2"><img class="img-responsive" src="~/Images/footer-logo.png" alt="" /></div>
+                        <div class="col-md-6 col-sm-6">
+                            <ul>
+                                <li><a href="">PRIVACY</a></li>
+                                <li><a href="">POLICY</a></li>
+                                <li><a href="">TERMS & CONDITIONS</a></li>
+                                <li><a href="">SECURITY</a></li>
+                            </ul>
+                            <p>© @DateTime.Now.Year ICON Software Limited. All Rights Reserved.</p>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <div class="footer-social-media">
+                                <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--Demo modal pop-->
+    <div id="myModal" class="modal fade modal-styleweb" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header clearfix"">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>                   
+                </div>
+                <div class="modal-body">
+                    <video controls controlsList="nodownload">                       
+                            <source src="../Videos/HelloWorld.mp4" type="video/mp4" />
+                    </video>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!--Demo modal pop-->
+</body>
+</html>
+<script type="text/javascript">
+    var $con = jQuery.noConflict();
+    $con(document).ready(function () {
+        $con('.your-class').slick({
+            dots: false,
+            autoplay: true,
+            //infinite: false,
+            speed: 600,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            responsive: [
+            {
+
+                breakpoint: 1199,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: true,
+                    dots: false
+                }
+            },
+                {
+
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            ]
+        });
+    });
+</script>

@@ -1,0 +1,168 @@
+﻿<div id="settingt1" class="tab-pane" ng-controller="authorisationrulesettingController">
+    <!-- <h3>Authorization</h3>
+     <hr />-->
+    <div class="form-group clearfix label-formcontrol row">
+
+        <div class="col-md-12">
+
+            <div class="actions-bt clearfix">
+
+                <button type="button" class="round-button waves-effect" data-toggle="modal" data-target="#authorization-modal" ng-click="getRuleDetails()">Add Authorization</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered m-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location </th>
+                    <th>Department </th>
+                    <th>Job Role </th>
+                    <th>Employment Type Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*ng-click="updateRule(item)"*@
+                <tr ng-repeat="item in AuthorisationRuleSettingsList">
+                    <td><a class="empname-click">{{item.ApproverName}}</a></td>
+                    <td>{{item.LocationName}}</td>
+                    <td>{{item.DepartmentName}}</td>
+                    <td>{{item.JobRoleName}}</td>
+                    <td>{{item.EmploymentTypeName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form name="formAuthorize" role="form" id="formAuthorize" class="edit-form" novalidate>
+        <div id="authorization-modal" class="modal fade modal-style wizard-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">New Authorization</h4>
+                    </div>
+                    <div class="modal-body">
+                        @*<div class="form-group col-sm-12">
+                                <p>Fill in the fields on each screen to create an employment record for a new starter within your business.</p>
+                            </div>*@
+
+                        <div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 label-control required " for="confirm">Location</label>
+                                <div class="col-md-12">
+                                    @*<input type="text" class="form-control" name="txtLocation" id="txtLocation" required ng-model="jobDetails.LocationID">*@
+                                    <select class="form-control chosen-select" name="ddlLocation" id="ddlLocation" required multiple>
+                                        <option>All</option>
+                                    </select>
+                                    @*<select id="ddlLocation" data-placeholder="Choose a Country..." class="chosen-select" multiple style="width:350px;" tabindex="4">
+                                            <option value=""></option>
+                                            <option value="United States">United States</option>
+                                            <option value="United Kingdom">United Kingdom</option>
+                                            <option value="Afghanistan">Afghanistan</option>
+                                            <option value="Albania">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                            <option value="American Samoa">American Samoa</option>
+                                            <option value="Andorra">Andorra</option>
+                                            <option value="Angola">Angola</option>
+                                            <option value="Anguilla">Anguilla</option>
+                                        </select>*@
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 label-control required " for="confirm">Department</label>
+                                <div class="col-md-12">
+                                    <select class="chosen-select" multiple id="ddlDept" name="ddlDept" required>
+                                        <option>All</option>
+                                        <option value="1">FINANCE</option>
+                                        <option value="2">HR</option>
+                                        <option value="3">IT</option>
+                                        <option value="4">Marketing</option>
+                                        <option value="5">SALES</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 label-control required " for="confirm">Job Role</label>
+                                <div class="col-md-12">
+                                    <select class="chosen-select" multiple id="ddlJobRole" name="ddlJobRole"  required>
+                                        <option>All</option>
+                                        <option value="1">Software engineer</option>
+                                        <option value="2">Systems analyst</option>
+                                        <option value="3">Business analyst</option>
+                                        <option value="4">Technical support</option>
+                                        <option value="5">Network engineer</option>
+                                        <option value="6">Technical consultant</option>
+                                        <option value="7">Technical sales</option>
+                                        <option value="8">HR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 label-control required " for="confirm">Employment Type</label>
+                                <div class="col-md-12">
+                                    <select class="form-control select2 chosen-select" id="ddlEmployeeType" name="ddlEmployeeType" required multiple>
+                                        <option>All</option>
+                                        <option value="1">Contract</option>
+                                        <option value="2">Full Time</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+
+                                <label class="col-md-12 label-control required " for="ddlSpecificEmployee">Specific Employee(s)</label>
+                                <div class="col-md-12">
+
+
+                                    <select name="ddlSpecificEmployee" required id="ddlSpecificEmployee" ng-model="AuthorisationRuleSettingsDetail.SpecificEmployeeID" ng-options="item as item.EmpName for item in EmployeeList track by item.EmpID" multiple class="form-control chosen-select">
+                                        <option value="">All</option>
+                                      
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <label class="col-md-12 label-control required " for="ddlExcludedEmployee">Excluded Employee(s)</label>
+                                <div class="col-md-12">
+                                    <div>
+
+                                        <select name="ddlExcludedEmployee" id="ddlExcludedEmployee" required ng-model="AuthorisationRuleSettingsDetail.ExcludeEmployeeID" ng-options="item.EmpName for item in EmployeeList track by item.EmpID" multiple class="form-control chosen-select">
+                                            <option value="">All</option>
+                                       
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <label class="col-md-12 label-control required " for="ddlApproverEmployee">Approver</label>
+                                <div class="col-md-12">
+                                    <div>
+
+                                        <select name="ddlApproverEmployee" id="ddlApproverEmployee" required ng-model="AuthorisationRuleSettingsDetail.ApproverID" ng-options="item as item.text for item in ReportingMangers track by item.id" class="form-control">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-20 mt-20" style="text-align:center;">
+                            <button type="reset" data-dismiss="modal" class="round-button waves-effect">Cancel</button>
+                            <button type="submit" class="round-button waves-effect" ng-click="saveRule(formAuthorize)"> Save</button>
+                        </div>
+                    </div>
+
+
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        </form>
+</div>

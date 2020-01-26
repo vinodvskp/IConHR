@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+@using System.Security.Claims
+@using System.Web.Optimization;
+@using ICONHRPortal.Extensions
+@{
+    var identity = HttpContext.Current.User.Identity as ClaimsIdentity;
+    //identity.HasClaim("", "");
+}
+<style>
+    .perform-table .table th {
+        border: 1px solid #270938;
+    }
+</style>
+
+<div class="content-page" ng-controller="performanceController">
+
+    <!-- Start content -->
+    <div class="content">
+       
+        <div class="container">
+
+            <div class="pageheader">
+
+                <h2>Performance </h2>
+
+                <div class="page-bar">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home"></i> Icon HR</a>
+                        </li>
+                        <li>
+                            <a href="#">Performance</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+           
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-box">
+                        <div class="form-group clearfix">
+
+                            <div class="col-md-3 ">
+                                <label for="employee">Review</label>
+                                <select class="form-control" id="employee" ng-change="onReviewChange(selectedReview)" ng-model="selectedReview" ng-options="rev.text for rev in ReviewNames">
+                                    <option>--- Select ---</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive perform-table">
+                            <table class="table table-bordered m-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Employee</th>
+                                        <th>Score</th>
+                                        <th>Manager</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><img id="EmpProfileImage" src="\Uploads\IMG_20160527_151955.jpg" alt="..." class="img-circle">@identity.Name</td>
+                                        <td><span class="score-text">{{scoreDetails.EmployeeScore}}</span></td>
+                                        <td><img id="MngProfileImage" src="\Uploads\IMG_20160527_151955.jpg" alt="..." class="img-circle">@identity.Claims.Where(c => c.Type == "RepMgrName").FirstOrDefault()</td>
+                                        <td><span class="score-text">{{scoreDetails.ManagerScore}}</span></td>
+                                        <!--<td></td>-->
+                                    </tr>
+                                </tbody>
+                                @*<tr class="gray-bg">
+                            <td>2</td>
+                            <td><img src="~/Images/perform-photo-img.jpg" alt="..." class="img-thumbnail">Vinod Kumar</td>
+                            <td><span class="score-text">2</span></td>
+                            <td><img src="~/Images/perform-photo-img.jpg" alt="..." class="img-thumbnail">Vinod Kumar</td>
+                            <td></td>
+                        </tr>*@
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+</div>

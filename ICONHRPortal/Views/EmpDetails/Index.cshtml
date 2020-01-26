@@ -1,0 +1,514 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<style>
+    .tab-content .pageheader {
+        display: none;
+    }
+</style>
+
+<div ng-controller="addEmployeeController">
+    <!-- Left Sidebar End -->
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <!-- heading breadcrumb -->
+                <div class="pageheader">
+                    <h2>Employees </h2>
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li> <a href="index.html"><i class="fa fa-home"></i> Icon HR</a> </li>
+                            <li> <a href="#" class="active">Employees</a>  </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- heading breadcrumb -->
+                <!--employees-tab -->
+                <div class="employees-tab">
+                    <div class="panel-section">
+                        <button type="button" data-toggle="collapse" data-target="#vert-empl"
+                                class="btn-sm visible-xs visible-sm collapsed btn-default btn btn-block m-t-sm">
+                            All notes
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-12" style="padding:0px;">
+                        <ul class="nav nav-tabs nav-justified   menu-tabs">
+                            <li class="active"><a href="#emp-t1" data-toggle="tab">Overview</a></li>
+                            <li><a href="#emp-t2" data-toggle="tab" ng-click="tabClick(2)">Timesheets</a></li>
+                            <li><a href="#emp-t3" data-toggle="tab">Planner</a></li>
+                            <li><a href="#emp-t4" data-toggle="tab">Documents</a></li>
+                            <li><a href="#emp-t5" data-toggle="tab" ng-click="tabClick(5)">Logbook</a></li>
+                            <li><a href="#emp-t6" data-toggle="tab">Performance</a></li>
+                        </ul>
+
+
+                    </div>
+                    <div class="container page-borders">
+                        <div class="col-md-2 employees-left">
+                            <div class="hpanel panel-group">
+                                <div class="slimscroll-menu">
+                                    <div id="vert-empl" class="tile-widget  text-center">
+                                        <div class="thumb thumb-xl">
+                                            <img class="img-circle" src="~/Styles/assets/images/arnold-avatar.jpg" alt="user image" />
+                                            <h4>{{employeeDetail.EmpName}}</h4>
+                                            <a href="" class="round-button waves-effect">Admin</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+
+                            <div class="hpanel">
+                                <div class="panel-body employees-right">
+                                    <div class="text-center hidden">We couldn't find any notes for you.</div>
+
+                                    <div class="tab-content">
+                                        <div id="emp-t1" class="tab-pane active">
+                                            <div class="row">
+                                                <div class="form-group label-text col-lg-5 col-md-6">
+                                                    <label class="label-control">Date Hired: <span>{{employeeDetail.EmpStartDate}}</span></label>
+                                                    <label class="label-control">Department: <span></span>{{employeeDetail.DeptName}}</label>
+                                                    <label class="label-control">Email:  <span>{{employeeDetail.EmailID}}</span></label>
+                                                </div>
+                                                <div class="form-group label-text col-lg-7 col-md-6">
+                                                    <label class="label-control">Location: <span>{{employeeDetail.LocationName}}</span></label>
+                                                    <label class="label-control">Contracted Hours: <span>{{employeeDetail.ContractedHours}}</span></label>
+                                                    <label class="label-control">Mobile: <span>{{employeeDetail.PhoneNumber}}</span></label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div id="emp-t2" class="tab-pane">
+                                            <!--<h3>Heading</h3>
+                                            <hr style="margin-bottom:0px;" />-->
+                                            <div id="emplo1" class="tab-pane active">
+                                                <div class="form-group clearfix label-formcontrol">
+                                                    <label class="control-label" for="confirm">Date</label>
+                                                    <input id="confirm" name="confirm" type="text" value="Date" disabled class="form-control width-200">
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered m-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Project</th>
+                                                                <th>Task</th>
+                                                                <th>Details</th>
+                                                                <th>Start Time</th>
+                                                                <th>End Time</th>
+                                                                <th>Quantity</th>
+                                                                <th>Hours</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody ng-repeat="timeSheet in EmployeeTimeSheetList">
+                                                            <tr>
+                                                                <td><a ng-click="getTimeSheet(timeSheet)">{{timeSheet.Project}}</a></td>
+                                                                <td>{{timeSheet.Task}}</td>
+                                                                <td>{{timeSheet.Details}}</td>
+                                                                <td>{{timeSheet.StartDate | date:'MM/dd/yyyy'}}</td>
+                                                                <td>{{timeSheet.EndDate | date:'MM/dd/yyyy'}}</td>
+                                                                <td>{{timeSheet.Quantity}}</td>
+                                                                <td>{{timeSheet.TotalHours}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="form-group clearfix col2-formcontrol">
+                                                    <div class="pull-right">
+                                                        <label class="control-label">Total</label>
+                                                        <input name="confirm" type="text" value="Date" class="form-control width-150">
+                                                        <input name="confirm" type="text" value="Date" class="form-control width-150">
+                                                    </div>
+                                                </div>
+
+                                                <div class="actions-bt clearfix">
+                                                    <div class="pull-right">
+                                                        <button type="button" class="round-button waves-effect" data-toggle="modal" data-target="#timesheet-addnew-modal" ng-click="addNewTimeSheet()">Add New</button>
+                                                        <button type="button" class="round-button waves-effect">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @Html.Partial("Planner")
+                                        @*<div id="emp-t3" class="tab-pane">
+                                                <div class="card-box clearfix">
+                                                    <div id="calendar"></div>
+                                                </div>
+                                            </div>*@
+                                        <input type="hidden" id="hdnScreenName" value="employeeScreen" />
+                                        @Html.Partial("Documents")
+
+                                        <div id="emp-t5" class="tab-pane">
+                                            <h3>The first line of Lorem Ipsum </h3>
+                                            <hr />
+                                            <div class="note-content">
+                                                @*<p>5 It is a long established fact that a reader will be distracted </p>*@
+                                                @Html.Partial("~/Views/EmpDetails/_PartialEmployeeLogBook.cshtml")
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="hdnScreen" value="employee" />
+                                        @Html.Partial("Performance")
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!--col-->
+                    </div>
+                </div>
+                <!--employees-tab -->
+            </div>
+        </div> <!-- content -->
+    </div>
+
+    <!--USER add-->
+    <div id="useradd-modal" class="modal fade modal-style wizard-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">New Starter</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-sm-12">
+                        <p>Fill in the fields on each screen to create an employment record for a new starter within your business.</p>
+                    </div>
+                    <form id="basic-form" action="#">
+                        <div>
+                            <h3>Personal Information</h3>
+                            <section>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">First Name</label>
+                                    <div class="col-md-9">
+                                        <input id="confirm" name="confirm" type="text" class="required form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Last Name</label>
+                                    <div class="col-md-9">
+                                        <input id="confirm" name="confirm" type="text" class="required form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Email</label>
+                                    <div class="col-md-9">
+                                        <input id="confirm" name="confirm" type="text" class="required form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Gender</label>
+                                    <div class="col-md-9">
+                                        <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">Male</label>
+                                        <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Female</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Date of Birth</label>
+                                    <div class="col-md-9">
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
+                                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                            </div><!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="postCode">Post Code</label>
+                                    <div class="col-md-9">
+                                        <input id="postCode" name="postCode" type="text" class="required form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="address">Address</label>
+                                    <div class="col-md-9">
+                                        <textarea id="address" class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="telephone">Telephone Number</label>
+                                    <div class="col-md-9">
+                                        <input id="telephone" name="telephone" type="text" class="required form-control">
+                                    </div>
+                                </div>
+                            </section>
+                            <h3>Job Information</h3>
+                            <section>
+                                <div class="user-name-heading">{{employeeDetail.EmpName}}</div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Copy Existing Details</label>
+                                    <div class="col-md-9">
+                                        <select class="selectpicker form-control" data-live-search="true">
+                                            <option title="Combo 1">Combo 1</option>
+                                            <option title="bombo 2">bombo 2</option>
+                                            <option title="aombo 3">aombo 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Company</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Location</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Department</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Job Role</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Reports to</label>
+                                    <div class="col-md-9">
+                                        <select class="selectpicker form-control" data-live-search="true">
+                                            <option title="Combo 1">Combo 1</option>
+                                            <option title="bombo 2">bombo 2</option>
+                                            <option title="aombo 3">aombo 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Start Date</label>
+                                    <div class="col-md-9">
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose2">
+                                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                            </div><!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">NI Number/SSN</label>
+                                    <div class="col-md-9">
+                                        <input id="confirm" name="confirm" type="text" class="required form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Holiday Year</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Work Pattern</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Contracted Hours</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Full Time Hours</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Measured In</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select2">
+                                            <option>Select</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Holidays</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group wizard-two-inputs">
+                                            <input type="text" class="form-control" placeholder="This Year">
+                                            <input type="email" class="form-control " placeholder="Next year">
+                                            <button type="submit" class="btn btn-custom">Help me calculate</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                    <label class="col-md-3 control-label " for="confirm">Salary</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group wizard-two-inputs">
+                                            <input type="text" class="form-control" placeholder="">
+                                            <select class="form-control select2">
+                                                <option>Select</option>
+                                                <option selected="selected" value="1">Annual</option>
+                                                <option value="2">Hourly</option>
+                                                <option value="3">Daily</option>
+                                                <option value="4">Weekly</option>
+                                                <option value="5">Monthly</option>
+                                            </select>
+                                            <select class="form-control select2">
+                                                <option>Select</option>
+                                                <option value="4923344">$</option>
+                                                <option selected="selected" value="4923345">£</option>
+                                                <option value="4923346">€</option>
+                                                <option value="-1">+(Manage This List)</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-custom">Help me calculate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <form name="form" role="form" id="frmValidation" class="edit-form" novalidate>
+        <!---TimeSheet-->
+        <div id="timesheet-addnew-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" id="TimeSheetPopup">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Assignment</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label class="label-control required">Project</label>
+                                <input type="text" placeholder="" name="txtProjectName" id="txtProjectName" ng-model="timeSheetDetail.Project" class="form-control" required>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="label-control required">Task</label>
+                                <input type="text" placeholder="" id="txtTask" name="txtTask" ng-model="timeSheetDetail.Task" class="form-control" required>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="label-control required">Details</label>
+                                <input type="text" placeholder="" id="txtDetails" name="txtDetails" ng-model="timeSheetDetail.Details" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group  col-sm-6">
+                                <label class="label-control required" for="confirm">Start Date & Time </label>
+                                <div class="input-group ">
+                                    <div class="input-group date" data-provide="datepicker" id="datepickerstart">
+                                        <input type='text' id="txtStartDate"   name="txtStartDate"   class="form-control date datetimepicker1" ng-model="timeSheetDetail.StartDate"  required/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                    </div>
+                                    @*<input type='text' class="form-control date datetimepicker1" ng-model="timeSheetDetail.StartDate" />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="label-control required" for="confirm">End Date & Time</label>
+                                <div class="input-group">
+                                    <div class="input-group date" data-provide="datepicker" id="datepickerend">
+                                        <input id="txtEndDate"  name="txtEnddate"  type='text' class="form-control date datetimepicker1" ng-model="timeSheetDetail.EndDate" required />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                    </div>
+                                    @*<input type='text' class="form-control date datetimepicker1" ng-model="timeSheetDetail.EndDate" />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group  col-sm-6">
+                                <label class="label-control required" for="confirm">Total Hours</label>
+                                <input type="text" class="form-control " id="txtTotalHours" name="txtTotalHours" ng-model="timeSheetDetail.TotalHours" required>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="label-control required" for="confirm"> Quantity</label>
+                                <input type="text" placeholder="" name="txtQuantity" id="txtQuantity" ng-model="timeSheetDetail.Quantity" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label class="label-control required">Notes</label>
+                                <textarea class="form-control" name="txtNotes" id="txtNotes" ng-model="timeSheetDetail.Notes" rows="3" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="reset" class="btn-default waves-effect" ng-click="clear(form)">Cancel</button>
+                            <button type="submit" class="round-button waves-effect" ng-click="timeSheetSubmit(form)"> Submit</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+        </form>
+</div>

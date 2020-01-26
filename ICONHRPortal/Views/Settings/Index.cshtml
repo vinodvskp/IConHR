@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<style>
+    .panel-group{
+        margin-bottom:0px;
+    }
+</style>
+<div class="content-page">
+    <div class="content">
+        <div class="container">
+            <!-- heading breadcrumb -->
+
+            <div class="pageheader">
+
+                <h2>Settings </h2>
+
+                <div class="page-bar">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home"></i> Icon HR</a>
+                        </li>
+                        <li>
+                            <a href="#">Settings</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            
+            <!-- heading breadcrumb -->
+
+            
+                <div class="col-md-12 " style="padding:0px;">
+                    <div class="hpanel panel-group">
+                       
+                          
+                                <ul class="nav nav-tabs nav-justified   menu-tabs">
+                                    <li class="active"><a href="#settingt0" data-toggle="tab">Holidays & Absence</a></li>
+                                    <li><a href="#settingt1" data-toggle="tab">Authorization</a></li>
+                                    <li><a href="#settingt2" data-toggle="tab">Administrators</a></li>
+                                    <li><a href="#settingt3" data-toggle="tab">Company</a></li>
+                                    <li><a href="#settingt4" data-toggle="tab">Employee</a></li>
+                                    <li><a href="#settingt5" data-toggle="tab">Email</a></li>
+                                    @*<li><a href="#settingt6" data-toggle="tab">Localization</a></li>*@
+                                    <li><a href="#settingt7" data-toggle="tab">Performance</a></li>
+
+                                </ul>
+                            
+                       
+                    </div>
+                </div>
+
+                <div class="container page-borders">
+                   
+                        <div class="hpanel">
+                            <div class="panel-body employees-right">
+                                <div class="text-center hidden">We couldn't find any notes for you.</div>
+                                <div class="tab-content">
+                                    @Html.Partial("HolidayAbsenceSetting")
+                                    @Html.Partial("AuthorisationSettings")
+                                    @Html.Partial("AdministratorSetting")
+                                    @Html.Partial("CompanySetting")
+                                    @Html.Partial("EmployeeSetting")
+                                    @Html.Partial("EmailSetting")
+                                    @Html.Partial("PerformanceReviewSetting")
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div><!--col-->
+            
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    jQuery("#ddlLocation").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+    jQuery("#ddlDept").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+    jQuery("#ddlJobRole").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+    jQuery("#ddlEmployeeType").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+    jQuery("#ddlSpecificEmployee").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+</script>

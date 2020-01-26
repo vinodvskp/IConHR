@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+@Html.Partial("EmployeeBulkUpload")
+
+<!--holiday-modal -->
+<div id="holiday-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Select Employees</h4>
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-heading-cont">Select the employee records you wish to change, either individually or by department</h6>
+                <div class="row">
+                    <div class="col-sm-12 select-employees-tableselect">
+                        <button type="submit"><i class="fa fa-check-square-o"></i> Select All</button>
+                        <button type="submit"><i class="fa fa-times"></i> Select None</button>
+
+                        <p><strong>0</strong> Employees selected</p>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered m-0">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="inlineCheckbox1" value="option1"> Department</th>
+                                <th>Employee</th>
+                                <th>Job Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" id="inlineCheckbox1" value="option1"> </td>
+                                <td><input type="checkbox" id="inlineCheckbox1" value="option1"> vinod kumar</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="round-button waves-effect" type="submit"> Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+<!--holiday-modal -->

@@ -1,0 +1,319 @@
+﻿@using SagePay.IntegrationKit;
+@using SagePay.IntegrationKit.Messages;
+
+@{
+    ViewBag.Title = "Result";
+    IFormPaymentResult PaymentStatusResult = (IFormPaymentResult)ViewBag.StatusResult;
+    string reason = string.Empty;
+    Layout = "~/Views/Shared/_LayoutPlain.cshtml";
+}
+
+<h2>Result</h2>
+
+<div>
+    @ViewBag.Error
+    <br />
+    Custom Param: @ViewBag._customParams
+</div>
+
+<div id="content">
+    @if (PaymentStatusResult != null)
+    {
+        if (PaymentStatusResult.Status == ResponseStatus.OK || PaymentStatusResult.Status == ResponseStatus.AUTHENTICATED || PaymentStatusResult.Status == ResponseStatus.REGISTERED)
+        {
+            <div id="contentHeader">
+                Your order has been Successfull done
+            </div>
+            <p>
+                The Form transaction has completed successfully and the customer has been returned
+                to this order completion page
+                <br>
+                <br>
+                The order number, for your customer's reference is: <strong>
+                    @PaymentStatusResult.VendorTxCode
+                </strong>
+                <br>
+                <br>
+                They should quote this in all correspondence with you, and likewise you should use
+                this reference when sending queries to Sage Pay about this transaction (along with
+                your Vendor Name).<br>
+                @if (!SagePaySettings.Environment.Equals("LIVE"))
+                {
+                    <text>The table below shows everything sent back from Form about this order.You would
+                        not normally show this level of detail to your customers, but it is useful during
+                        development.You may wish to store this information in a local database if you have
+                        one.<br>
+                        <br>
+                        You can customise this page to send confirmation e - mails, display delivery times,
+                        present download pages, whatever is appropriate for your application.                    </text>
+                }
+            </p>
+        }
+        else
+        {
+            <div id="contentHeader">
+                Your order has NOT been successful
+            </div>
+            <p>
+                The Form transaction did not completed successfully and the customer has been returned
+                to this completion page for the following reason:
+                <br>
+            </p>
+
+
+            if (PaymentStatusResult.Status == ResponseStatus.NOTAUTHED)
+            { reason = "You payment was declined by the bank.  This could be due to insufficient funds, or incorrect card details."; }
+            else if (PaymentStatusResult.Status == ResponseStatus.ABORT)
+            { reason = "You chose to Cancel your order on the payment pages."; }
+            else if (PaymentStatusResult.Status == ResponseStatus.REJECTED)
+            { reason = "Your order did not meet our minimum fraud screening requirements."; }
+            else if (PaymentStatusResult.Status == ResponseStatus.INVALID || PaymentStatusResult.Status == ResponseStatus.MALFORMED)
+            { reason = "We could not process your order because we have been unable to register your transaction with our Payment Gateway."; }
+            else if (PaymentStatusResult.Status == ResponseStatus.ERROR)
+            { reason = "We could not process your order because our Payment Gateway service was experiencing difficulties."; }
+            else
+            { reason = "The transaction process failed. Please contact us with the date and time of your order and we will investigate."; }
+
+            <p class="warning">
+                <strong>
+                    @reason
+                </strong>
+            </p>
+            <p>
+                The order number, for your customer's reference is: <strong>
+                    @PaymentStatusResult.VendorTxCode
+                </strong><br>
+                <br>
+                They should quote this in all correspondence with you, and likewise you should use
+                this reference when sending queries to Sage Pay about this transaction (along with
+                your Vendor Name).<br>
+                <br>
+                The table below shows everything sent back from Form about this order. You would
+                not normally show this level of detail to your customers, but it is useful during
+                development. You may wish to store this information in a local database if you have
+                one.<br>
+                <br>
+                You can customise this page to suggest alternative payment options, direct the customer
+                to call you, or simply present a failure notice, whatever is appropriate for your
+                application.
+            </p>
+        }
+
+        if (!SagePaySettings.Environment.Equals("LIVE"))
+        {
+            <table class="formTable">
+                <tr>
+                    <td colspan="2">
+                        <div class="subheader">Details sent back by Form</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldLabel">
+                        VendorTxCode:
+                    </td>
+                    <td class="fieldData">
+                        @PaymentStatusResult.VendorTxCode
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldLabel">
+                        Status:
+                    </td>
+                    <td class="fieldData">
+                        @PaymentStatusResult.Status
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldLabel">
+                        Status Message:
+                    </td>
+                    <td class="fieldData">
+                        @PaymentStatusResult.StatusDetail
+                    </td>
+                </tr>
+                @if (PaymentStatusResult.FraudResponse != FraudResponse.NONE)
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Fraud Response:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.FraudResponse
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td class="fieldLabel">
+                        Amount (Incl. Surcharge):
+                    </td>
+                    <td class="fieldData">
+                        @PaymentStatusResult.Amount
+                    </td>
+                </tr>
+                @if (PaymentStatusResult.Surcharge.HasValue)
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Surcharge:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.Surcharge
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.VpsTxId))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            VPSTxId:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.VpsTxId
+                        </td>
+                    </tr>
+                }
+                @if (PaymentStatusResult.TxAuthNo > 0)
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            VPSAuthCode (TxAuthNo):
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.TxAuthNo
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.BankAuthCode))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Bank Authorisation Code:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.BankAuthCode
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.DeclineCode))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Bank Decline Code:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.DeclineCode
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.AvsCv2))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            AVSCV2 Results:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.AvsCv2
+                            <span class="smalltext">
+                                - Address:@PaymentStatusResult.AddressResult, Post Code:@PaymentStatusResult.PostCodeResult,
+                                CV2:@PaymentStatusResult.Cv2Result
+                            </span>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td class="fieldLabel">
+                        Gift Aid Transaction?:
+                    </td>
+                    <td class="fieldData">
+                        @PaymentStatusResult.GiftAid == 1 ? "Yes" : "No"
+                    </td>
+                </tr>
+                @if (PaymentStatusResult.ThreeDSecureStatus != ThreeDSecureStatus.NONE)
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            3D-Secure Status:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.ThreeDSecureStatus
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.Cavv))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            CAVV:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.Cavv
+                        </td>
+                    </tr>
+                }
+                @if (PaymentStatusResult.CardType != CardType.NONE)
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Card Type:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.CardType
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.Last4Digits))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Last 4 Digits:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.Last4Digits
+                        </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrWhiteSpace(PaymentStatusResult.ExpiryDate))
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            Expiry Date:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.ExpiryDate
+                        </td>
+                    </tr>
+                }
+                @if (PaymentStatusResult.CardType == CardType.PAYPAL)
+                {
+                    <tr>
+                        <td class="fieldLabel">
+                            PayPal Address Status:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.AddressStatus
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fieldLabel">
+                            PayPal Payer Status:
+                        </td>
+                        <td class="fieldData">
+                            @PaymentStatusResult.PayerStatus
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="2">
+                        <div class="subheader">Basket Contents</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+            </table>
+            <div class="greyHzShadeBar">
+                &nbsp;
+            </div>
+        }
+    }
+

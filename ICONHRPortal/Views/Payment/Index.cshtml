@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPlain.cshtml";
+}
+
+@model ICONHRPaymentGateway.CustomForm
+@{
+    ViewBag.Title = "Payment Page";
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<div class="jumbotron1">
+    <h1>SagePay</h1>
+    <p class="lead">Employee Details</p>
+
+    <form action="/Payment/Index" method="post" id="SagePayForm" name="SagePayForm">
+
+        <div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>First Name</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.FirstName)
+                    </div>
+                </div> <br />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.LastName)
+                    </div>
+
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Address 1</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.Address1, new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.Address1)
+                    </div>
+
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Address 2</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.Address2, new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.Address2)
+                    </div>
+
+                </div><br />
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>City</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.City, new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.City)
+                    </div>
+
+                </div> <br />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Post Code</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.PostCode, new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.PostCode)
+                    </div>
+
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Phone</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.Phone, new { @class = "form-class" })
+                    </div>
+
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>DOB</label>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.DOB, "{0:MM/dd/yyyy}", new { @class = "form-class" })
+                        <br />
+                        @Html.ValidationMessageFor(x => x.DOB)
+                    </div>
+
+                </div><br />
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <p><button type="submit" class="btn btn-primary btn-lg">Submit </button></p>
+    </form>
+</div>

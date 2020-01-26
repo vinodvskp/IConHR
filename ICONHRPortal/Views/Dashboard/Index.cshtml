@@ -1,0 +1,510 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<!-- Left Sidebar End -->
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+            <div class="pageheader">
+
+                <h2>Dashboard </h2>
+
+                <div class="page-bar">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home"></i> Icon HR</a>
+                        </li>
+                        <li>
+                            <a href="charts.html">Charts & Graphs</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <!-- end row -->
+            <!-- Begin page -->
+            <!-- Top Bar Start -->
+            <div class="">
+                <!-- Button mobile view to collapse sidebar menu -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Absence Duration</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Absence Cost</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Head Count</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>FTE</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-4"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Monthly Headcount</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-5"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Monthly Starters/ Leavers</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-6"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Headcount by Gender</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-7"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card-box dashbox">
+                            <h3>Age Distribution</h3>
+                            <div class="dashbox-chart-block" id="dep-console-chart-8"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END wrapper -->
+        </div> <!-- container -->
+        </div> <!-- content -->
+    </div>
+
+    <script>
+        var $con = jQuery.noConflict();
+        $con(document).ready(function () {
+           
+            $con(function () {
+
+                Highcharts.chart('dep-console-chart', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        name: 'Console-1',
+                        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                    }, {
+                        name: 'Console-2',
+                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    }]
+                });
+
+
+
+
+                Highcharts.chart('dep-console-chart-2', {
+                    chart: {
+                        type: 'spline',
+                        inverted: true
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        reversed: false,
+                        title: {
+                            enabled: true,
+                            text: ''
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value + 'km';
+                            }
+                        },
+                        maxPadding: 0.05,
+                        showLastLabel: true
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Console'
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value + '°';
+                            }
+                        },
+                        lineWidth: 2
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{series.name}</b><br/>',
+                        pointFormat: '{point.x} km: {point.y}°C'
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                enable: false
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Temperature',
+                        data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
+                            [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
+                    }]
+                });
+
+
+
+
+                Highcharts.chart('dep-console-chart-3', {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        allowDecimals: false,
+                        labels: {
+                            formatter: function () {
+                                return this.value; // clean, unformatted number for year
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value / 1000 + 'k';
+                            }
+                        }
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                    },
+                    plotOptions: {
+                        area: {
+                            pointStart: 1940,
+                            marker: {
+                                enabled: false,
+                                symbol: 'circle',
+                                radius: 2,
+                                states: {
+                                    hover: {
+                                        enabled: true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Console-1',
+                        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+                            1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
+                            27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+                            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+                            24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+                            22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+                            10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+                    }, {
+                        name: 'Console-2',
+                        data: [null, null, null, null, null, null, null, null, null, null,
+                            5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
+                            4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+                            15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+                            33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+                            35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+                            21000, 20000, 19000, 18000, 18000, 17000, 16000]
+                    }]
+                });
+
+
+
+                Highcharts.chart('dep-console-chart-4', {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Console-1', 'Console-2', 'Console-3', 'Console-4', 'Console-5']
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Console-A',
+                        data: [5, 3, 4, 7, 2]
+                    }, {
+                        name: 'Console-B',
+                        data: [2, -2, -3, 2, 1]
+                    }, {
+                        name: 'Console-C',
+                        data: [3, 4, 4, -2, 5]
+                    }]
+                });
+
+
+
+                Highcharts.chart('dep-console-chart-5', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Console-1', 'Console-2', 'Console-3', 'Console-4', 'Console-5']
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        }
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                        shared: true
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'percent'
+                        }
+                    },
+                    series: [{
+                        name: 'Console-A',
+                        data: [5, 3, 4, 7, 2]
+                    }, {
+                        name: 'Console-B',
+                        data: [2, 2, 3, 2, 1]
+                    }, {
+                        name: 'Console-C',
+                        data: [3, 4, 4, 2, 5]
+                    }]
+                });
+
+
+
+                Highcharts.chart('dep-console-chart-6', {
+                    chart: {
+                        type: 'spline'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value + '°';
+                            }
+                        }
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                radius: 4,
+                                lineColor: '#666666',
+                                lineWidth: 1
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Console-1',
+                        marker: {
+                            symbol: 'square'
+                        },
+                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
+                            y: 26.5,
+                            marker: {
+                                symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)'
+                            }
+                        }, 23.3, 18.3, 13.9, 9.6]
+
+                    }, {
+                        name: 'Console-2',
+                        marker: {
+                            symbol: 'diamond'
+                        },
+                        data: [{
+                            y: 3.9,
+                            marker: {
+                                symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'
+                            }
+                        }, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    }]
+                });
+
+
+
+                Highcharts.chart('dep-console-chart-7', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['A', 'B', 'C', 'D', 'E']
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        }
+                    },
+                    legend: {
+                        reversed: true
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal'
+                        }
+                    },
+                    series: [{
+                        name: 'John',
+                        data: [5, 3, 4, 7, 2]
+                    }, {
+                        name: 'Jane',
+                        data: [2, 2, 3, 2, 1]
+                    }, {
+                        name: 'Joe',
+                        data: [3, 4, 4, 2, 5]
+                    }]
+                });
+
+
+
+
+                Highcharts.chart('dep-console-chart-8', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: [
+                            'Jan',
+                            'Feb',
+                            'Mar',
+                            'Apr',
+                            'May',
+                            'Jun',
+                            'Jul',
+                            'Aug',
+                            'Sep',
+                            'Oct',
+                            'Nov',
+                            'Dec'
+                        ],
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: 'Console-1',
+                        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+                    }, {
+                        name: 'Console-2',
+                        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+                    }, {
+                        name: 'Console-3',
+                        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+                    }, {
+                        name: 'Console-4',
+                        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+
+                    }]
+                });
+            });
+        });
+    </script>

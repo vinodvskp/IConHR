@@ -1,0 +1,332 @@
+﻿<style>
+    .question-tab .wizard > .content > .body ul > li {
+        display: inline !important;
+    }
+    .question-tab .nav-tabs.nav-justified > li {
+        width: 50% !important;
+    }
+    .question-tab .nav-tabs.nav-justified > li {
+        float: left !important;
+    }
+    
+    .checkbox-success input[type="checkbox"]:checked + label::before {
+        background-color: #5cb85c;
+        border-color: #5cb85c;
+    }
+
+    .checkbox-success input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+
+    .checkbox {
+        padding-left: 20px;
+    }
+
+        .checkbox label {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            padding-left: 5px;
+        }
+
+            .checkbox label::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                width: 17px;
+                height: 17px;
+                left: 0;
+                margin-left: -20px;
+                border: 1px solid #cccccc;
+                border-radius: 3px;
+                background-color: #fff;
+                -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            }
+
+            .checkbox label::after {
+                display: inline-block;
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                left: 0;
+                top: 0;
+                margin-left: -20px;
+                padding-left: 3px;
+                padding-top: 1px;
+                font-size: 11px;
+                color: #555555;
+            }
+
+        .checkbox input[type="checkbox"] {
+            opacity: 0;
+            z-index: 1;
+        }
+
+            .checkbox input[type="checkbox"]:focus + label::before {
+                outline: thin dotted;
+                outline: 5px auto -webkit-focus-ring-color;
+                outline-offset: -2px;
+            }
+
+            .checkbox input[type="checkbox"]:checked + label::after {
+                font-family: 'FontAwesome';
+                content: "\f00c";
+            }
+
+            .checkbox input[type="checkbox"]:disabled + label {
+                opacity: 0.65;
+            }
+
+                .checkbox input[type="checkbox"]:disabled + label::before {
+                    background-color: #eeeeee;
+                    cursor: not-allowed;
+                }
+
+        .checkbox.checkbox-circle label::before {
+            border-radius: 50%;
+        }
+
+        .checkbox.checkbox-inline {
+            margin-top: 0;
+        }
+
+    .checkbox-primary input[type="checkbox"]:checked + label::before {
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+
+    .checkbox-primary input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+
+    .checkbox-danger input[type="checkbox"]:checked + label::before {
+        background-color: #d9534f;
+        border-color: #d9534f;
+    }
+</style>
+<div id="settingt7" class="tab-pane" ng-controller="performanceReviewSettingController">
+    <!-- <h3>Performance Review Setting</h3>
+     <hr />-->
+    <div class="user-txt" style="width100%;">
+        <a data-toggle="modal" title="Add Performance Setting" ng-click="clearModel()" data-target="#addPerformance-modal" href="javascript:void(0)"><img class="img-responsive user-add-icon" src="/Images/user-add-icon.png" alt="">Performance Review Setting</a></a>
+    </div>
+    <div class="table-responsive" style="float: left;width: 100%;">
+        <table class="table table-bordered m-0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Department</th>
+                    <th>Job Role</th>
+                    <th>Employment Type</th>
+                    <th>Service length</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="performance in PerformanceDetails">
+                <tr>
+                    <td>{{performance.ReviewTitle}}</td>
+                    <td>{{performance.ReviewCompletionDate | date:'MM/dd/yyyy'}}</td>
+                    <td>{{performance.CompanyID}}</td>
+                    <td>{{performance.LocationName}}</td>
+                    <td>{{performance.DepartmentName}}</td>
+                    <td>{{performance.JobRoleName}}</td>
+                    <td>{{performance.EmploymentTypeName}}</td>
+                    <td>{{performance.LengthOfService}}</td>
+                    <td>
+                        <a data-toggle="modal" title="Add Performance Setting" data-target="#addPerformance-modal" href="javascript:void(0)"
+                           ng-click="getReviewSettingByid(performance.PerformanceReviewID,false)"><i class="fa fa-edit"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="addPerformance-modal" class="modal fade modal-style wizard-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg pop-newemploye">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Performance Review Setting</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="basic-form" type="post" action="#" name="basicform" ng-submit="onSavePerformanceSetting()">
+                        <div>
+                            <h3>Review Details</h3>
+                            <section>
+                                <div ng-if="!hasEdit" class="form-group col-md-6">
+                                    <label class="col-md-12  control-label" for="employee">Copy From</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="employee" ng-change="onCopyReviewChange(selectedCopyFrom)" ng-model="selectedCopyFrom" ng-options="emp.text for emp in ReviewSettingCopy">
+                                            <option>--- Select ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="txtTitle">Title</label>
+                                    <div class="col-md-12">
+                                        <input id="txtTitle" name="txtTitle" type="text" class="required form-control" ng-model="performance.ReviewTitle" required>
+                                        @*<xt-validation-inline for="username"></xt-validation-inline>*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="CompletionDate">Completion Date</label>
+                                    <div class="input-group col-md-12">
+                                        <div class="input-group date" data-provide="datepicker" style="padding-left: 8px; padding-right: 8px">
+                                            <input type='text' id="CompletionDate" name="CompletionDate" class="form-control date" ng-model="performance.ReviewCompletionDate" />
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="CompanyID">Company</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="CompanyID" name="CompanyID" ng-model="selectedCompany" ng-options="com.text for com in Company">
+                                            <option>--- Select ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="txtLocation">Location</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="txtLocation" ng-model="selectedLocation" ng-options="loc.text for loc in Locations">
+                                            <option>--- Select ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="txtDepartment">Department</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="txtDepartment" ng-model="selectedDepartment" ng-options="dept.text for dept in Departments">
+                                            <option>--- Select ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="txtJobRole">Job Role</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="txtJobRole" name="txtJobRole" ng-model="selectedJobRole" ng-options="jRole.text for jRole in JobRoles">
+                                            <option>--- Select ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label" for="txtEmploymentType">Employment Type</label>
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="txtEmploymentType" name="txtEmploymentType" ng-model="selectedEmploymentType" ng-options="empType.text for empType in EmploymentTypes">
+                                            <option>--- Select ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label " for="txtServiceLength">Length Of Service</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="required form-control" id="txtServiceLength" name="txtServiceLength" ng-model="performance.LengthOfService">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-12 control-label">Ratings</label>
+                                    <div class="col-md-12">
+                                        <div ng-repeat="rating in Ratings">
+                                            <div class="form-group clearfix col-md-7">
+                                                <label class="control-label" for="txtRating{{$index}}">{{rating.RatingValue}}.{{$index + 1}}</label>
+                                               
+                                                    <input type="text" class="form-control" id="txtRating{{$index}}" name="txtRating{{$index}}" ng-model="rating.RatingDescription">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="pull-right col-md-5 mt-20">
+                                            <div ><a ng-click="addRatings()" href="#" class="round-button waves-effect">Add More</a></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section>
+                            <h3>Segment Details</h3>
+                            <section>
+                                @*ng-style="{'background-color':'white'}"*@
+                                <div class="card-box row" ng-style="{'background-color':(s.divedit==true) ? 'yellow' : 'white'}" ng-if="!questionActiveTab" ng-repeat="s in Segments" style="padding: 0px;">
+                                    <label class="col-md-5 control-label">{{s.SegmentName}}</label>
+                                    <label class="col-md-5 control-label">{{s.SegmentDescription}}</label>
+                                    <i ng-click="onSegmentDelete(s)" style="font-size: 20px" class="pull-right control-label m-t-10 fa fa-trash-o"></i>
+                                    <i ng-click="onSegmentEdit(s)" style="font-size: 20px" class="pull-right control-label m-t-10 fa fa-edit"></i>
+                                </div>
+                                <div class="card-box row" ng-if="questionActiveTab" ng-repeat="q in Questions" style="padding: 0px;">
+                                    <label class="col-md-8 control-label">{{q.Question}}?</label>
+                                    <label class="col-md-3 control-label">{{q.HelpText}}</label>
+                                    <i ng-click="onQuestionDelete(q)" style="color: red; font-size: 20px; margin-top: 6px; margin-right: 4px;" class="pull-right  fa fa-trash-o"></i>
+                                    <i ng-click="onQuestionEdit(q)" style="color: #428bca; font-size: 20px; margin-top: 6px;" class="pull-right fa fa-edit"></i>
+                                </div>
+                                <div class="col-md-12 question-tab" style="padding:0px;">
+                                    <ul class="nav nav-tabs nav-justified   menu-tabs">
+                                        <li ng-class="{active:segmentsActiveTab == true}" style="list-style-type: none!important;"><a data-toggle="tab" href="#segment">Segment</a></li>
+                                        <li ng-class="{active:questionActiveTab == true}" style="list-style-type: none!important;">
+                                            <a data-toggle="tab" href="#question"><i class="fa fa-question-circle-o"></i>&nbsp;Questions</a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <div class="tab-content" style="margin-top:80px;">
+                                        <div id="segment" class="tab-pane fade in active">
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12 control-label" for="txtSegmentTitle">Title</label>
+                                                <div class="col-md-12">
+                                                    <input id="txtSegmentTitle" name="txtSegmentTitle" type="text" class="required form-control"
+                                                           ng-model="segment.SegmentName" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12 control-label" for="txtSegmentDescription">Description</label>
+                                                <div class="col-md-12">
+                                                    <input id="txtSegmentDescription" name="txtSegmentDescription" type="text" class="required form-control"
+                                                           ng-model="segment.SegmentDescription" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <a class=" pull-right" data-toggle="pill" ng-click="onTabChange()" href="#question">
+                                                    <i class="fa fa-arrow-circle-right fa-2x" style="color:#341753;"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="question"  ng-class="{active:questionActiveTab}" class="tab-pane fade">
+
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12 control-label" for="txtQuestion">Question</label>
+                                                <div class="col-md-12">
+                                                    <input id="txtQuestion" name="txtQuestion" type="text" class="required form-control"
+                                                           ng-model="question.Question" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12 control-label" for="txtHelpText">Help Text</label>
+                                                <div class="col-md-12">
+                                                    <input id="txtHelpText" name="txtHelpText" type="text" class="required form-control"
+                                                           ng-model="question.HelpText" required>
+                                                    <i ng-click="onQuestionAdd()" style="color:#341753;" class="fa fa-plus-circle fa-2x"></i>
+                                                </div>
+                                               
+                                                @*<button class="btn btn-primary" ng-click="onQuestionAdd()" type="button"><i class="fa fa-plus-circle fa-2x "></i></button>*@
+                                            </div>
+                                            <div class="col-md-12" style="text-align:center;">
+                                                <button ng-if="!hasEdit" class="round-button waves-effect" ng-click="onSegmentAdd()" type="button">Add Segment</button>
+                                            </div>
+                                          
+                                            @*<i ng-click="onQuestionTabChange()" class=" pull-right fa fa-arrow-circle-right fa-2x"></i>*@
+                                            <a class="btn pull-right btn-choose" id="segmentArrow" data-toggle="pill" ng-click="onQuestionTabChange()" href="#segment"><i class="fa fa-arrow-circle-left fa-2x" style="color:#341753;"></i></a>
+                                        </div>
+
+                                    </div>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>

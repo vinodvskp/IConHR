@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Admin Dashboard </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link href="~/Styles/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Styles/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Styles/css/Home/slick.css" rel="stylesheet" />
+    <link href="~/Styles/css/Home/home-style.css" rel="stylesheet" />
+    <link href="~/Styles/css/Home/home-responsive.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Top Bar Start -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <!-- Image logo -->
+                <a href="index.html" class="logo">
+                    <span><img src="assets/images/logo.png" alt="" /></span><i>
+                        <img src="assets/images/logo_sm.png" alt="" />
+                    </i>
+                </a>
+            </div>
+            <!-- Button mobile view to collapse sidebar menu -->
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <!-- Navbar-left -->
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <button type="button" class="button-menu-mobile open-left waves-effect">
+                                <i class="dripicons-menu"></i>
+                            </button>
+                        </li>
+
+                    </ul>
+                    <!-- Right(Notification) -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-xs">
+                            <form role="search" class="app-search">
+                                <input type="text" placeholder="Search..."
+                                       class="form-control">
+                                <a href="#"><i class="fa fa-search"></i></a>
+                            </form>
+                        </li>
+                        <li>
+                            <a href="#" class="right-menu-item dropdown-toggle" data-toggle="dropdown">
+                                <i class="dripicons-bell"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right dropdown-lg user-list notify-list animated flipInX">
+                                <li class="list-group notification-list m-b-0">
+                                    <div class="slimscroll">
+                                        <!-- list item-->
+                                        <a href="javascript:void(0);" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left p-r-10">
+                                                    <em class="fa fa-diamond bg-primary"></em>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
+                                                    <p class="m-0">
+                                                        There are new settings available
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!-- list item-->
+                                        <a href="javascript:void(0);" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left p-r-10">
+                                                    <em class="fa fa-cog bg-warning"></em>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">New settings</h5>
+                                                    <p class="m-0">
+                                                        There are new settings available
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!-- list item-->
+                                        <a href="javascript:void(0);" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left p-r-10">
+                                                    <em class="fa fa-bell-o bg-custom"></em>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Updates</h5>
+                                                    <p class="m-0">
+                                                        There are <span class="text-primary font-600">2</span> new updates available
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!-- list item-->
+                                        <a href="javascript:void(0);" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left p-r-10">
+                                                    <em class="fa fa-user-plus bg-danger"></em>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">New user registered</h5>
+                                                    <p class="m-0">
+                                                        You have 10 unread messages
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!-- list item-->
+                                        <a href="javascript:void(0);" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left p-r-10">
+                                                    <em class="fa fa-diamond bg-primary"></em>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
+                                                    <p class="m-0">
+                                                        There are new settings available
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!-- list item-->
+                                        <a href="javascript:void(0);" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left p-r-10">
+                                                    <em class="fa fa-cog bg-warning"></em>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">New settings</h5>
+                                                    <p class="m-0">
+                                                        There are new settings available
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <!-- end notification list -->
+                            </ul>
+                        </li>
+                        <li class="dropdown user-box">
+                            <a href="#" class="dropdown-toggle waves-effect user-link" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-user-circle-o img-circle user-img" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list animated flipInX">
+                                <li><a href="javascript:void(0)">Profile</a></li>
+                                <li><a data-toggle="modal" data-target="#changepassword-modal" href="javascript:void(0)">Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a href="javascript:void(0)">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+                <div id="sidebar-menu">
+                    <ul class="metisMenu nav" id="side-menu">
+                        <li class="menu-title">Navigation</li>
+                        <li><a href="index.html"><i class="fi-air-play"></i> <span> Dashboard </span> </a></li>
+                        <li>
+                            <a href="javascript: void(0);" aria-expanded="true"><i class="fi-briefcase"></i> <span> UI Kit </span> <span class="menu-arrow"></span></a>
+                            <ul class="nav-second-level nav" aria-expanded="true">
+                                <li><a href="coustom-page.html">Coustom typograp</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="employees.html"><i class="fi-air-play"></i> <span> employees </span> </a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="page-title-box">
+                                <h4 class="page-title">Form Single</h4>
+                                <ol class="breadcrumb p-0 m-0">
+                                    <li><a href="#">Icon</a></li>
+                                    <li class="active">Dashboard</li>
+                                </ol>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-box">
+                                <div class="row clearfix">
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-3 col-sm-4 label-control">Lorem ipsum dolor sit amet</label>
+                                        <div class="col-lg-6 col-sm-7">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-3 col-sm-4 label-control">Lorem ipsum dolor sit amet</label>
+                                        <div class="col-lg-6 col-sm-7">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-3 col-sm-4 label-control">Lorem ipsum dolor sit amet</label>
+                                        <div class="col-lg-6 col-sm-7">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="bt-block-wrapp m-t-20">
+                                    <div class="bt-block">
+                                        <a href="" class="gray-round-button">Cancel</a>
+                                        <a href="" class="round-button">Submit</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- container -->
+            </div> <!-- content -->
+            <footer class="footer text-right">2018 © Icon HR Software</footer>
+        </div>
+    </div>
+    <!-- END wrapper -->
+    <!--Change password -->
+    <div id="changepassword-modal" class="modal fade modal-style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="label-control">Old Password</label>
+                        <input type="text" placeholder="" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-control">New Password</label>
+                        <input type="text" placeholder="" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-control">Confirm Password</label>
+                        <input type="text" placeholder="" class="form-control">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="round-button waves-effect" type="submit"> Submit</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!--Change password -->
+    </div>
+    <!-- jQuery  -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/metisMenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <!-- plugins  -->
+    <script src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- plugins  -->
+
+    <script src="assets/js/jquery.core.js"></script>
+    <script src="assets/js/jquery.app.js"></script>
+    <script src="assets/js/jquery.init.js"></script>
+
+</body>
+</html>

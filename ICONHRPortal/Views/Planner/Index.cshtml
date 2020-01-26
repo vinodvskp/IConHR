@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<style>
+    .fc-view-container {
+        pointer-events: none;
+    }
+
+    ul.dropdown-menu li {
+        cursor: pointer;
+    }
+
+        ul.dropdown-menu li span.red {
+            color: red;
+        }
+
+        ul.dropdown-menu li span.green {
+            color: green;
+        }
+
+
+
+</style>
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+
+            <input type="hidden" id="hdnScreenName" value="planner" />
+            <div>
+                @Html.Partial("~/Views/EmpDetails/Planner.cshtml")
+            </div>
+           
+        </div>
+    </div>
+</div>

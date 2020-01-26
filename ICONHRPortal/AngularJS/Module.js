@@ -1,0 +1,1 @@
+﻿var IconApp = angular.module('IconHRModule', ['ngMessages', 'ngFileUpload']);

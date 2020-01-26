@@ -1,0 +1,156 @@
+﻿<div id="settingt0" class="tab-pane active" ng-controller="holidayAbsenceSettingController">
+    <!-- <h3>Holidays & Absence</h3><hr />-->
+   
+    <form name="formHoliday" role="form" id="formHoliday" class="edit-form" novalidate>
+        <div class="container" style="padding:0px;">
+            <div class="form-group col-md-6">
+                <label class="col-md-12  label-control required " for="confirm">Location</label>
+                <div class="col-md-12 ">
+                    <select class="form-control" required  ng-model="location" ng-options="loc.text for loc in Locations" ng-change="onLocationChange(location)">
+                        @*<option value="-2">All</option>
+                        <option value="5325870">Head Office</option>
+                        <option value="-1">+(Manage This List)</option>*@
+                        <option>--- Select ---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 addlocation-input" ng-if="canLocationAdd">
+                <label class="col-md-12 label-control required " for="txtLocationName"></label>
+                <div class="col-md-9">
+
+                    <input type="text" ng-model="holidayAbsenceSetting.locationName" class="required form-control" id="txtLocationName" />
+
+                </div>
+                <div class="col-md-3 ">
+                    <div>
+                        <button class="round-button waves-effect btn-sm" ng-click="onLocationSave()" type="button">+ Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding:0px;">
+            <div class="form-group col-md-6">
+                <label class="col-md-12  label-control required " for="confirm">Normal Working Hours (Daily)</label>
+                <div class="col-md-12">
+                    <div class="input-group1">
+                        <input type="text" required ng-model="holidayAbsenceSetting.NormalWorkingHours" class="required form-control" id="txtWorkingHours">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="padding:0px;">
+            <div class="form-group col-md-6">
+                <label class="col-md-12  label-control required " for="confirm">WorkPattren(Weekly)</label>
+                <div class="col-md-12 ">
+                    <select class="form-control" required ng-model="workPattern" ng-options="wp.text for wp in WorkPatterns" ng-change="onWorkPatternChange(workPattern)">
+                        <option>--- Select ---</option>
+                        @*<option value="-2">All</option>
+                        <option value="5325870">Monday to Friday 9am to 5.30 pm</option>
+                        <option value="-1">No Work pattren</option>*@
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 addlocation-input" ng-if="canWorkPatternAdd">
+                <label class="col-md-12  label-control required " for="txtLocationName"></label>
+                <div class="col-md-9">
+                    <div>
+                        <input type="text"  ng-model="holidayAbsenceSetting.workPatternName" class="required form-control" id="txtWorkPatternName" />
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div>
+                        <button class="round-button waves-effect btn-sm" ng-click="onWorkPatternSave()" type="button">+ Add</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="col-md-12  label-control required " for="confirm">Maximum Duration of Consecutive Annual Leave</label>
+            <div class="col-md-12 ">
+                <input id="confirm" name="confirm" required type="text" ng-model="holidayAbsenceSetting.MaximumDurationofConsecutiveAnnualLeave" class="required form-control">
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-6">
+            <label class="col-md-12 label-control required " for="confirm">Max Holiday carry over days</label>
+            <div class="col-md-12">
+                <input id="confirm" name="confirm" required ng-model="holidayAbsenceSetting.MaxHolidayCarryOverDays" type="text" class="required form-control">
+            </div>
+        </div>
+
+        <div class="col-md-12" style="padding:0px;">
+            <div class="form-group col-md-6">
+                <label class="col-md-12 label-control required " required for="confirm">Holiday Year</label>
+                <div class="col-md-12">
+                    <select class="form-control" ng-model="holidayYear">
+                        <option value="">Jan-Dec</option>
+                        <option value="1">Feb-Jan</option>
+                        <option value="2">Mar-Feb</option>
+                        <option value="3">Apr-Mar</option>
+                        <option value="4">May-Apr</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="col-md-12 label-control required " required for="confirm">Default Public Holiday Template</label>
+                <div class="col-md-12">
+                    <select class="form-control" ng-model="publicHolidayTemplate">
+                        <option value="">Select</option>
+                        <option value="1">Company Calender</option>
+                        <option value="2">Defaut Calender</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+
+            <div class="col-md-12">
+                <label class="label-control " for="confirm">Does the Total Holiday Entitlement include Public Holidays?</label>
+                <label class="check-input">
+                    <input type="checkbox"  id="chkHolidayEnttilement" ng-model="holidayAbsenceSetting.TotalHolidayEntitlementIncludePUblicHolidays">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+
+            <div class="col-md-12 ">
+
+                <span class="input-group-btn">
+                    <label class="label-control " for="confirm">Los Rules&nbsp;</label>
+                    <label class="check-input"><input type="checkbox" id="chkLosRules" ng-model="holidayAbsenceSetting.LOSRuleID"><span class="checkmark"></span></label>
+                </span>
+                <!--<span class="input-group-btn">
+                <button class="btn btn-warning btn-reset" type="button">Add</button>
+            </span>-->
+
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <div class="col-md-12">
+                <div class="form-group" style="text-align:center;">
+                    <div class="input-group input-file" name="Fichier1">
+                        <button class="round-button waves-effect" ng-click="onHolidayAbsenceClick(formHoliday)" type="submit">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <modal-dialog show="modalShown" message="Successfully" width="600px" height="200">
+            <div>
+                <h4>Notification</h4>
+                <br />
+                <p>{{Message}}</p>
+            </div>
+        </modal-dialog>
+    </form>
+   
+</div>

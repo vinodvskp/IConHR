@@ -1,0 +1,154 @@
+﻿
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+
+            <div class="pageheader">
+
+                <h2>Bulk Employee Data Upload </h2>
+
+                <div class="page-bar">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home"></i> Icon HR</a>
+                        </li>
+                        <li>
+                            <a href="#">Bulk Actions</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+          
+            <!-- end row -->
+
+            <div class="container page-borders">
+                <div ng-controller="employeeBulkUploadController">
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label class="label-control">Upload Employees</label>
+                            <div class="input-group file-upload-block">
+                                <input class="form-control" type="text" title="Upload the Data, please check the sample file for the format" readonly placeholder="Upload file">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        Browse
+                                        <input type="file" id="txtUpload" name="txtUpload" ngf-select="SelectFile($file)" class="form-control">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3" style="margin-top:23px !important" >
+                            <button class="round-button waves-effect" ng-click="Upload()" type="button">Upload</button>
+                        </div>
+                        <div class="form-group col-sm-3" style="margin-top: 23px !important; float: right;" >
+                            @*<button class="round-button waves-effect" ng-click="Upload()" type="button">Download Sample Template</button>*@
+                            <a ng-click="onDownload()" href="#"><i class="fa fa-download"></i>Sample Template</a>
+                        </div>
+                    </div>
+
+                
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0" >
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Employee Name
+                                    </th>
+                                    <th>Role</th>
+                                    <th>Company</th>
+                                    <th>
+                                        Phone Number
+                                    </th>
+                                    <th>
+                                        E-mail
+                                    </th>
+                                    <th>
+                                        Gender
+                                    </th>
+                                    <th>
+                                        Date Of Birth
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
+                                    <th>
+                                        Country
+                                    </th>
+                                    <th>
+                                        Postal Code
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody ng-repeat="m in Employees">
+                                <tr>
+                                    <td>
+                                        {{m.EmpName}}
+                                    </td>
+                                    <td>
+                                        {{m.EmpRole}}
+                                    </td>
+                                    <td>{{m.CompanyName}}</td>
+                                    <td>{{m.PhoneNumber}}</td>
+                                    <td>{{m.EmailID}}</td>
+                                    <td>{{m.Gender}}</td>
+                                    <td>{{m.DateOfBirth | date : 'MM/dd/yyyy'}}</td>
+                                    <td>{{m.Address}}</td>
+                                    <td>{{m.CountryName}}</td>
+                                    <td>{{m.PostalCode}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <modal-dialog show="modalShown" message="Successfully" width="600px" height="200">
+                            <div>
+                                <h4>Notification</h4>
+                                <br />
+                                <p>{{Message}}</p>
+                            </div>
+                        </modal-dialog>
+                    </div>
+                </div>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+           
+
+            @*<div class="row">
+            <div class="col-md-12">
+                <div class="card-box">
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a data-toggle="modal" data-target="#holiday-modal" href="javascript:void(0)">Holiday Entitlements (This Year)</a></td>
+                                    <td>Adjust holiday entitlements for the current year (January 2018 - December 2018)</td>
+                                </tr>
+
+                                <tr>
+                                    <td><a data-toggle="modal" data-target="#holiday-modal" href="javascript:void(0)">Holiday Entitlements (Next Year)</a></td>
+                                    <td>Adjust holiday entitlements for next year (January 2019 - December 2019)</td>
+                                </tr>
+
+                                <tr>
+                                    <td><a data-toggle="modal" data-target="#holiday-modal" href="javascript:void(0)">Training</a></td>
+                                    <td>	Assign employees to a new training course</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        </div> <!-- container -->
+    </div> <!-- content -->
+</div>

@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<style>
+    .fc-view-container {
+        pointer-events: none;
+    }
+
+    ul.dropdown-menu li {
+        cursor: pointer;
+    }
+
+        ul.dropdown-menu li span.red {
+            color: red;
+        }
+
+        ul.dropdown-menu li span.green {
+            color: green;
+        }
+</style>
+<h2>Reports List</h2>
+<div class="content-page">
+    <div class="content">
+        <div class="container">
+            <a id="ReportUrl_Performance" style="margin-left:50px" href="@Url.Action("ReportTemplate", "Reports",
+   new { ReportName = "Performance", ReportDescription ="List of Employee Report", Width = 100, Height = 650 })">1)Employee Report</a>
+            <a id="ReportUrl_Performance" style="margin-left:50px" href="@Url.Action("ReportTemplate", "Reports",
+   new { ReportName = "Performance", ReportDescription ="List of Employee Report", Width = 100, Height = 650 })">1)Employee Report</a>
+
+        </div>
+        <div class="container">
+        <a id="ReportUrl_Performance" style="margin-left:50px" href="@Url.Action("ReportTemplate", "Reports",
+   new { ReportName = "Performance", ReportDescription ="List of Employee Report", Width = 100, Height = 650 })">1)Employee Report</a>
+        <a id="ReportUrl_Performance" style="margin-left:50px" href="@Url.Action("ReportTemplate", "Reports",
+   new { ReportName = "Performance", ReportDescription ="List of Employee Report", Width = 100, Height = 650 })">1)Employee Report</a>
+
+    </div>
+    </div>
+</div>
+
+

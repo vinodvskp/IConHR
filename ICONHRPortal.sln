@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICONHRPortal", "ICONHRPortal\ICONHRPortal.csproj", "{1262989B-72F7-4C0E-937B-F138072E20DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICONHRPortal.Model", "ICONHRPortal.Model\ICONHRPortal.Model.csproj", "{6A0D883F-E77D-4E83-A0D5-710F8B6F990B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICONHRPortal.Data", "ICONHRPortal.Data\ICONHRPortal.Data.csproj", "{BAD8ACC7-E639-4E26-B74B-29690FECF7B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICONHRPortal.BusninessLogic", "ICONHRPortal.BusninessLogic\ICONHRPortal.BusninessLogic.csproj", "{6610C951-CE1E-49DB-BD2C-174EF20E5045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICONHRPaymentGateway", "ICONHRPaymentGateway\ICONHRPaymentGateway.csproj", "{764C4B03-2CC8-4F4A-AFD3-0F1E03A4A603}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1262989B-72F7-4C0E-937B-F138072E20DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1262989B-72F7-4C0E-937B-F138072E20DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1262989B-72F7-4C0E-937B-F138072E20DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1262989B-72F7-4C0E-937B-F138072E20DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A0D883F-E77D-4E83-A0D5-710F8B6F990B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A0D883F-E77D-4E83-A0D5-710F8B6F990B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A0D883F-E77D-4E83-A0D5-710F8B6F990B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A0D883F-E77D-4E83-A0D5-710F8B6F990B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD8ACC7-E639-4E26-B74B-29690FECF7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD8ACC7-E639-4E26-B74B-29690FECF7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD8ACC7-E639-4E26-B74B-29690FECF7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD8ACC7-E639-4E26-B74B-29690FECF7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6610C951-CE1E-49DB-BD2C-174EF20E5045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6610C951-CE1E-49DB-BD2C-174EF20E5045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6610C951-CE1E-49DB-BD2C-174EF20E5045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6610C951-CE1E-49DB-BD2C-174EF20E5045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{764C4B03-2CC8-4F4A-AFD3-0F1E03A4A603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764C4B03-2CC8-4F4A-AFD3-0F1E03A4A603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764C4B03-2CC8-4F4A-AFD3-0F1E03A4A603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764C4B03-2CC8-4F4A-AFD3-0F1E03A4A603}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20DCF0D9-E5A8-4083-9BB6-67DCE5B43802}
+	EndGlobalSection
+EndGlobal

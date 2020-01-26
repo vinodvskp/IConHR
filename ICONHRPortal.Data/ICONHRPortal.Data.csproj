@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BAD8ACC7-E639-4E26-B74B-29690FECF7B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICONHRPortal.Data</RootNamespace>
+    <AssemblyName>ICONHRPortal.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EF6.BulkInsert, Version=6.1.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EF6.BulkInsert.6.1.0.6\lib\net45\EF6.BulkInsert.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.1.0.9, Culture=neutral, PublicKeyToken=7ee2e825d201459e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.1.0.9\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="ICONHRRepository.cs" />
+    <Compile Include="IGenericRepository.cs" />
+    <Compile Include="IRepository\IAdministratorSettingRepository.cs" />
+    <Compile Include="IRepository\IMgrPerReviewRepository.cs" />
+    <Compile Include="IRepository\IMgrReviewRatingRepository.cs" />
+    <Compile Include="IRepository\IEmpReviewRatingRepository.cs" />
+    <Compile Include="IRepository\IMgrReviewSegmentRepository.cs" />
+    <Compile Include="IRepository\IEmpReviewSegmentRepository.cs" />
+    <Compile Include="IRepository\IEmpPerReviewRepository.cs" />
+    <Compile Include="IRepository\IPerformancesegmentQuestionRepository.cs" />
+    <Compile Include="IRepository\IManagerPerformanceRepository.cs" />
+    <Compile Include="IRepository\IEmployeePerformanceRepository.cs" />
+    <Compile Include="IRepository\IAuthorisationRuleSettingRepository.cs" />
+    <Compile Include="IRepository\IEmploymentTypeRepository.cs" />
+    <Compile Include="IRepository\IJobRoleRepository.cs" />
+    <Compile Include="IRepository\IPerformanceSegmentRepository.cs" />
+    <Compile Include="IRepository\IPerformanceScoreRepository.cs" />
+    <Compile Include="IRepository\IPerformanceReviewSettingRepository.cs" />
+    <Compile Include="IRepository\IDocumentCategoryTypeRepository.cs" />
+    <Compile Include="IRepository\IDocumentRepository.cs" />
+    <Compile Include="IRepository\IEmployeeLogBookRepository.cs" />
+    <Compile Include="IRepository\IEmployeeNotificationRepository.cs" />
+    <Compile Include="IRepository\IEmployeeTimesheetRepository.cs" />
+    <Compile Include="IRepository\IEmailSettingRepository.cs" />
+    <Compile Include="IRepository\IEmployeeSettingRepository.cs" />
+    <Compile Include="IRepository\ICompanyDetailsRepository.cs" />
+    <Compile Include="IRepository\ICountryRepository.cs" />
+    <Compile Include="IRepository\IHolidaysAbsenceSettingRepository.cs" />
+    <Compile Include="IRepository\ICardExpireMonthRepository.cs" />
+    <Compile Include="IRepository\ICardExpireYearRepository.cs" />
+    <Compile Include="IRepository\ICardTypeRepository.cs" />
+    <Compile Include="IRepository\ICompanySettingRepository.cs" />
+    <Compile Include="IRepository\IDepartmentRepository.cs" />
+    <Compile Include="IRepository\IPlannerCategoryTypeRepository.cs" />
+    <Compile Include="IRepository\IPlannerRepository.cs" />
+    <Compile Include="IRepository\IWorkPatternRepository.cs" />
+    <Compile Include="IRepository\ILocationRepository.cs" />
+    <Compile Include="IRepository\IPaymentRepository.cs" />
+    <Compile Include="IRepository\IEmployeeDetailsRepository.cs" />
+    <Compile Include="ICONHRContext.cs" />
+    <Compile Include="Models\EmployeeTimesheet.cs" />
+    <Compile Include="Models\EmpMgrPerReviewSegment.cs" />
+    <Compile Include="Models\ICONHRContext.cs" />
+    <Compile Include="Models\lkpCardExpMonth.cs" />
+    <Compile Include="Models\lkpCardExpYear.cs" />
+    <Compile Include="Models\lkpCardType.cs" />
+    <Compile Include="Models\lkpCountry.cs" />
+    <Compile Include="Models\lkpDepartment.cs" />
+    <Compile Include="Models\lkpDocumentCategoryType.cs" />
+    <Compile Include="Models\lkpEmployeeRole.cs" />
+    <Compile Include="Models\lkpEmploymentType.cs" />
+    <Compile Include="Models\lkpJobType.cs" />
+    <Compile Include="Models\lkpLanguage.cs" />
+    <Compile Include="Models\lkpLocation.cs" />
+    <Compile Include="Models\lkpPlannerCategoryType.cs" />
+    <Compile Include="Models\Mapping\EmployeeTimesheetMap.cs" />
+    <Compile Include="Models\Mapping\EmpMgrPerReviewSegmentMap.cs" />
+    <Compile Include="Models\Mapping\lkpCardExpMonthMap.cs" />
+    <Compile Include="Models\Mapping\lkpCardExpYearMap.cs" />
+    <Compile Include="Models\Mapping\lkpCardTypeMap.cs" />
+    <Compile Include="Models\Mapping\lkpCountryMap.cs" />
+    <Compile Include="Models\Mapping\lkpDepartmentMap.cs" />
+    <Compile Include="Models\Mapping\lkpDocumentCategoryTypeMap.cs" />
+    <Compile Include="Models\Mapping\lkpEmployeeRoleMap.cs" />
+    <Compile Include="Models\Mapping\lkpEmploymentTypeMap.cs" />
+    <Compile Include="Models\Mapping\lkpJobTypeMap.cs" />
+    <Compile Include="Models\Mapping\lkpLanguageMap.cs" />
+    <Compile Include="Models\Mapping\lkpLocationMap.cs" />
+    <Compile Include="Models\Mapping\lkpPlannerCategoryTypeMap.cs" />
+    <Compile Include="Models\Mapping\PerformanceReviewSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblAdminDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblAdministratorSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblAuthorisationRuleSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblCompanyDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblCompanySettingMap.cs" />
+    <Compile Include="Models\Mapping\tblCreditCardBillingDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblCreditCardDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblDocumentMap.cs" />
+    <Compile Include="Models\Mapping\tblDomainDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblEmailSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblEmployeeDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblEmployeeJobDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblEmployeePerformanceMap.cs" />
+    <Compile Include="Models\Mapping\tblEmployeeSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblEmpPerReviewPerformanceMap.cs" />
+    <Compile Include="Models\Mapping\tblEmpPerReviewRatingMap.cs" />
+    <Compile Include="Models\Mapping\tblEmpPerReviewSegmentMap.cs" />
+    <Compile Include="Models\Mapping\tblHolidays_AbsenceSettingsMap.cs" />
+    <Compile Include="Models\Mapping\tblJobRoleMap.cs" />
+    <Compile Include="Models\Mapping\tblLocalizationSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblLogBookMap.cs" />
+    <Compile Include="Models\Mapping\tblManagerPerformanceMap.cs" />
+    <Compile Include="Models\Mapping\tblMgrPerReviewPerformanceMap.cs" />
+    <Compile Include="Models\Mapping\tblMgrPerReviewRatingMap.cs" />
+    <Compile Include="Models\Mapping\tblMgrReviewPerformanceMap.cs" />
+    <Compile Include="Models\Mapping\tblMgrPerReviewSegmentMap.cs" />
+    <Compile Include="Models\Mapping\tblPerformaceSegmentQuestionMap.cs" />
+    <Compile Include="Models\Mapping\tblPerformanceScoreMap.cs" />
+    <Compile Include="Models\Mapping\tblPerformanceReviewSettingMap.cs" />
+    <Compile Include="Models\Mapping\tblPerformanceSegmentMap.cs" />
+    <Compile Include="Models\Mapping\tblNotificationsMap.cs" />
+    <Compile Include="Models\Mapping\tblPlannerMap.cs" />
+    <Compile Include="Models\Mapping\tblReportingManagerMap.cs" />
+    <Compile Include="Models\Mapping\WorkPatternMap.cs" />
+    <Compile Include="Models\PerformanceReviewSetting.cs" />
+    <Compile Include="Models\tblAdminDetail.cs" />
+    <Compile Include="Models\tblAdministratorSetting.cs" />
+    <Compile Include="Models\tblAuthorisationRuleSetting.cs" />
+    <Compile Include="Models\tblCompanyDetail.cs" />
+    <Compile Include="Models\tblCompanySetting.cs" />
+    <Compile Include="Models\tblCreditCardBillingDetail.cs" />
+    <Compile Include="Models\tblCreditCardDetail.cs" />
+    <Compile Include="Models\tblDocument.cs" />
+    <Compile Include="Models\tblDomainDetail.cs" />
+    <Compile Include="Models\tblEmailSettings.cs" />
+    <Compile Include="Models\tblEmployeeDetail.cs" />
+    <Compile Include="Models\tblEmployeeJobDetail.cs" />
+    <Compile Include="Models\tblEmployeePerformance.cs" />
+    <Compile Include="Models\tblEmployeeSetting.cs" />
+    <Compile Include="Models\tblEmpPerReviewPerformance.cs" />
+    <Compile Include="Models\tblEmpPerReviewRating.cs" />
+    <Compile Include="Models\tblEmpPerReviewSegment.cs" />
+    <Compile Include="Models\tblHolidays_AbsenceSettings.cs" />
+    <Compile Include="Models\tblJobRole.cs" />
+    <Compile Include="Models\tblLocalizationSetting.cs" />
+    <Compile Include="Models\tblLogBook.cs" />
+    <Compile Include="Models\tblManagerPerformance.cs" />
+    <Compile Include="Models\tblMgrPerReviewPerformance.cs" />
+    <Compile Include="Models\tblMgrPerReviewRating.cs" />
+    <Compile Include="Models\tblMgrPerReviewSegment.cs" />
+    <Compile Include="Models\tblPerformaceSegmentQuestion.cs" />
+    <Compile Include="Models\tblPerformanceScore.cs" />
+    <Compile Include="Models\tblPerformanceReviewSetting.cs" />
+    <Compile Include="Models\tblPerformanceSegment.cs" />
+    <Compile Include="Models\tblNotifications.cs" />
+    <Compile Include="Models\tblPlanner.cs" />
+    <Compile Include="Models\tblReportingManager.cs" />
+    <Compile Include="Models\WorkPattern.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\MgrPerReviewRepository.cs" />
+    <Compile Include="Repository\MgrReviewRatingRepository.cs" />
+    <Compile Include="Repository\EmpReviewRatingRepository.cs" />
+    <Compile Include="Repository\MgrReviewSegmentRepository.cs" />
+    <Compile Include="Repository\EmpReviewSegmentRepository.cs" />
+    <Compile Include="Repository\EmpPerReviewRepository.cs" />
+    <Compile Include="Repository\PerformancesegmentQuestionRepository.cs" />
+    <Compile Include="Repository\ManagerPerformanceRepository.cs" />
+    <Compile Include="Repository\EmployeePerformanceRepository.cs" />
+    <Compile Include="Repository\AuthorisationRuleSettingRepository.cs" />
+    <Compile Include="Repository\EmploymentTypeRepository.cs" />
+    <Compile Include="Repository\JobRoleRepository.cs" />
+    <Compile Include="Repository\PerformanceSegmentRepository.cs" />
+    <Compile Include="Repository\PerformanceScoreRepository.cs" />
+    <Compile Include="Repository\CountryRepository.cs" />
+    <Compile Include="Repository\DocumentCategoryTypeRepository.cs" />
+    <Compile Include="Repository\DocumentRepository.cs" />
+    <Compile Include="Repository\EmailSettingRepository.cs" />
+    <Compile Include="Repository\EmployeeLogBookRepository.cs" />
+    <Compile Include="Repository\EmployeeNotificationRepository.cs" />
+    <Compile Include="Repository\EmployeeSettingRepository.cs" />
+    <Compile Include="Repository\CompanySettingRepository.cs" />
+    <Compile Include="Repository\CompanyDetailsRepository.cs" />
+    <Compile Include="Repository\HolidaysAbsenceSettingRepository.cs" />
+    <Compile Include="Repository\CardExpireMonthRepository.cs" />
+    <Compile Include="Repository\CardExpireYearRepository.cs" />
+    <Compile Include="Repository\CardTypeRepository.cs" />
+    <Compile Include="Repository\PerformanceReviewSettingRepository.cs" />
+    <Compile Include="Repository\DepartmentRepository.cs" />
+    <Compile Include="Repository\AdministratorSettingRepository.cs" />
+    <Compile Include="Repository\EmployeeTimesheetRepository.cs" />
+    <Compile Include="Repository\PlannerCategoryTypeRepository.cs" />
+    <Compile Include="Repository\PlannerRepository.cs" />
+    <Compile Include="Repository\WorkPatternRepository.cs" />
+    <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\PaymentRepository.cs" />
+    <Compile Include="Repository\EmployeeDetailsRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICONHRPortal.Model\ICONHRPortal.Model.csproj">
+      <Project>{6a0d883f-e77d-4e83-a0d5-710f8b6f990b}</Project>
+      <Name>ICONHRPortal.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlQuery\Emp_adminstatorSetting_TRG.sql" />
+    <Content Include="SqlQuery\GetAdministratorSettings_sp.sql" />
+    <Content Include="SqlQuery\tblEmployeeDetails.sql" />
+    <Content Include="SqlQuery\sp_Get_MgrPerformaceDetails.sql" />
+    <Content Include="SqlQuery\tblMgrPerReviewPerformance.sql" />
+    <Content Include="SqlQuery\tblMgrPerReviewRating.sql" />
+    <Content Include="SqlQuery\tblMgrPerReviewSegment.sql" />
+    <Content Include="SqlQuery\sq_EmployeePerformanceDetails.sql" />
+    <Content Include="SqlQuery\tblAuthirazationSetting.sql" />
+    <Content Include="SqlQuery\tblEmployeePerformance.sql" />
+    <Content Include="SqlQuery\tblEmpPerReviewSegment.sql" />
+    <Content Include="SqlQuery\tblEmpPerReviewPerformance.sql" />
+    <Content Include="SqlQuery\tblEmpPerReviewRating.sql" />
+    <Content Include="SqlQuery\tblManagerPerformance.sql" />
+    <Content Include="SqlQuery\tblPerformanceScore.sql" />
+    <Content Include="SqlQuery\tblPerformanceReviewSettings.sql" />
+    <Content Include="SqlQuery\tblPerformaceSegmentQuestions.sql" />
+    <Content Include="SqlQuery\tblPerformanceSegment.sql" />
+    <Content Include="SqlQuery\lkpEmploymentType.sql" />
+    <Content Include="SqlQuery\tblPlanner.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
